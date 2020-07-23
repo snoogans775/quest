@@ -1,0 +1,5 @@
+
+# POST AND PM INLINE ATTACHMENTS BEGINS
+RewriteEngine on
+RewriteRule attachment_(\d+)\.(\d+)_(\d+)\.pdf index.php?action=dlattach;topic=$1.$2;attach=$3
+# POST AND PM INLINE ATTACHMENTS ENDS

@@ -1,18 +1,23 @@
-<?php include("../includes/header.php"); ?>
-<div class="page">
-	<font color="red">
-	<?php echo form_errors($errors). $_SESSION["message"]; 
-	$_SESSION["message"] = "";
-	?>
-	</font>
-	<?php 
-		if(isset($current_subject)) { 
-			include("{$current_subject["menu_name"]}.php"); 
-		} else {
-			include("home.php");
-		} ?>
-	<?php include("../includes/footer.php"); ?>
+<?php 
+	ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); 
+	echo phpinfo();
+	include("../includes/header.php");
+?>
+	<div class="page">
+		<font color="red">
+		<?php # Display any form errors
+			echo form_errors($errors). $_SESSION["message"]; 
+			$_SESSION["message"] = "";
+		?>
+		</font>
+		<?php # Display menu item for navigation
+			if(isset($current_subject)) { 
+				include("{$current_subject["menu_name"]}.php"); 
+			} else {
+				include("home.php");
+			}
+		include("../includes/footer.php"); ?>
 	
-</div>
+	</div>
 </body>
 </html>

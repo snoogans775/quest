@@ -27,7 +27,7 @@
 		$query .= "'{$username}', '{$username}', '{$hashed_password}'";
 		$query .= ")";
 		$result = mysqli_query($connection, $query); 
-		//$result will not be a typical variable. It will be a resource.
+		//$result will not be a variable. It will be a resource.
 
 		if ($result && mysqli_affected_rows($connection) >= 0) {
 			//Success

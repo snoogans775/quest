@@ -1,7 +1,6 @@
 <h1>The Quest is Underway</h1>
 
-<!-- I was really frustrated with the display_list() when I made this. It could be implemented 
-into the header image for a really neat effect.
+<!-- This can be implemented into the header image for a really neat effect.
 <div style="position:absolute; z-index=0; color: #e1e1e1; font-size: 9px; letter-spacing: 3px;">
 	<?php /*
 	$game_set = find_all_games();

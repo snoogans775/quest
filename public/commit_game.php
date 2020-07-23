@@ -13,10 +13,6 @@ if (isset($_POST["submit"])) {
 		$source_user_id = mysql_prep($_POST["source_user_id"]);
 		$game_id = mysql_prep($_POST["game_id"]);
 		
-		//echo $comments;
-		//echo $user_id;
-		//echo $source_user_id;
-		
 		$query  = "INSERT INTO completion_commits SET 
 							user_id = {$user_id}, 
 		 					game_id = {$game_id},

@@ -1,64 +1,15 @@
 <?php include("../includes/mng_usr_header.php"); ?>
+<?php include("../includes/funcitons.php"); ?>
 
 
 <?php
-if (isset($_POST["submit"])) {
-	//validations
-	$required_fields = array("title", "platform");
-	validate_presences($required_fields);
+	if (isset($_POST["submit"])) {
+		$title = $_POST["title"];
+		$platform = $_POST["platform"];
+		$challenge = $_POST["challenge"];
 	
-	$fields_with_max_lengths = array("title" => 40, "challenge" => 20);
-	validate_max_lengths($fields_with_max_lengths);
-	
-	$game = find_game_by_title($_POST["title"]);
-	$title = mysql_prep($_POST["title"]);
-	$platform = mysql_prep($_POST["platform"]);
-	$challenge = mysql_prep($_POST["challenge"]);
-	
-	// Inserts game data into user's list, returns existing id if game already exists
-	if (empty($errors)) {
-		// Makes sure the game has not been entered already. This does not check for misspellings. It only checks the string as provided by the user.
-			$query  = "INSERT INTO games ("; 
-			$query .= " title, platform";
-			$query .= ") VALUES (";
-			$query .= " '{$title}', '{$platform}' ";
-			$query .= ")";
-			$result = mysqli_query($connection, $query); 
-		
-			if ($result && mysqli_affected_rows($connection) >= 0) {
-				//Success
-				$safe_title = htmlspecialchars($title);
-				$_SESSION["message"] = "{$safe_title} added to database. "; 
-			} else {
-				//Failure
-				$_SESSION["message1"] = "Game Already Entered into database. ";
-			}
-		// Inserts into relational table. This identifies the game with the user.	
-		// Once again, game is the only table that uses the syntax game_id. Sigh.
-		$game = find_game_by_title($_POST["title"]);
-		$user_id = mysql_prep($_SESSION["user_id"]);
-		$game_id = mysql_prep($game["game_id"]);
-
-		$query  = "INSERT IGNORE INTO users_games ("; 
-		$query .= " user_id, game_id, challenge";
-		$query .= ") VALUES (";
-		$query .= " {$user_id}, {$game_id}, '{$challenge}' ";
-		$query .= ")";
-		$result = mysqli_query($connection, $query); 
-		//$result will not be a typical variable. It will be a resource.
-
-		if ($result && mysqli_affected_rows($connection) >= 0) {
-			//Successs
-			$_SESSION["message"] .= "<br />Your list has been updated.";
-			redirect_to("add_game.php");
-		} else {
-			//Failure
-			$_SESSION["message"] .= "Game Not Entered. Please contact the webmaster for help";
-			redirect_to("add_game.php");
-	  } 
-	}
-}	// This is probably a GET request 
-// END OF if (isset($_POST["submit"]))
+		add_game_to_list()
+	}	// This is probably a GET request 
 ?>
 <!-- BEGIN PAGE CONTENT -->
 <a href="manage_user.php">Your Quest ></a>

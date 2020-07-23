@@ -284,14 +284,16 @@
 	function login_form() {
 
 		if (!isset($_SESSION["username"])) { 
-			$output  = '<form action="login.php" method="POST">
-										<input type="text" placeholder="username" name="username" /><br />
-										<input type="password" placeholder="password" name="password" /><br/>
-										<span>
-											<input type="submit" name="submit" value="login" />
-									</form>
-										<a href="new_user.php">&nbsp &nbsp New To The Quest?</a>
-									</span>';
+			//FIXME: SPAN IS ACROSS ANOTHER TAG
+			$output  = '
+				<form action="login.php" method="POST">
+					<input type="text" placeholder="username" name="username" /><br />
+					<input type="password" placeholder="password" name="password" /><br/>
+					<span>. 
+					<input type="submit" name="submit" value="login" />
+				</form>
+				<a href="new_user.php">&nbsp &nbsp New To The Quest?</a>
+				</span>';
 		} else {
 			$output .= '<span id="greeting">Hello, ';
 			$output .= $_SESSION["username"];
@@ -374,13 +376,13 @@
 	
 	function find_followed_games_by_user($user_id) {
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
-		// wasn't. I really do. Changing it simply does not jibe with this function for some reason.
+		// wasn't. I really do. Changing it simply does not work with this function for some reason.
 		global $connection;
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
 		
 		$query  = "SELECT * ";
 		$query .= "FROM games ";
-		$query .= "INNER JOIN currently_following ";
+		$query .= "INNER JOIN currently_following "; 
 		$query .= "ON games.game_id = currently_following.game_id ";
 		$query .= "INNER JOIN users ";
 		$query .= "ON users.id = currently_following.user_id ";
@@ -455,8 +457,7 @@
 	}
 	
 	function find_list_item_by_game($game_id, $table="users_games") {
-		// games.game_id is the only column in the database that uses this naming scheme. I wish it
-		// wasn't. I really do. Changing it simply does not jibe with these functions for some reason.
+		// games.game_id is the only column in the database that uses this naming scheme.
 		global $connection;
 		$safe_game_id = mysqli_real_escape_string($connection, $game_id);
 		
@@ -599,7 +600,68 @@
 			return null;
 		}
 	}
-	//API AND EMAIL FUNCTIONS
+	
+	//LIST MODIFY FUNCTIONS
+	
+	function add_game_to_list($title, $platform, $challenge = "") {
+		$required_fields = array("title", "platform");
+		validate_presences($required_fields);
+	
+		$fields_with_max_lengths = array("title" => 40, "challenge" => 20);
+		validate_max_lengths($fields_with_max_lengths);
+	
+		$game = find_game_by_title($_POST["title"]);
+		$title = mysql_prep($_POST["title"]); // Use the user-submitted title
+		$platform = mysql_prep($_POST["platform"]); // Use the user-submitted platform
+		$challenge = mysql_prep($_POST["challenge"]);
+	
+		// Inserts game data into user's list, returns existing id if game already exists
+		if (empty($errors)) {
+			// Makes sure the game has not been entered already. This does not check for misspellings. It only checks the string as provided by the user.
+				$query  = "INSERT INTO games ("; 
+				$query .= " title, platform";
+				$query .= ") VALUES (";
+				$query .= " '{$title}', '{$platform}' ";
+				$query .= ")";
+				$result = mysqli_query($connection, $query); 
+		
+				if ($result && mysqli_affected_rows($connection) >= 0) {
+					//Success
+					$safe_title = htmlspecialchars($title);
+					$_SESSION["message"] = "{$safe_title} added to database. "; 
+				} else {
+					//Failure
+					$_SESSION["message1"] = "Game Already Entered into database. ";
+				}
+			// Inserts into relational table. This identifies the game with the user.	
+			// Once again, game is the only table that uses the syntax game_id.
+			$game = find_game_by_title($_POST["title"]);
+			$user_id = mysql_prep($_SESSION["user_id"]);
+			$game_id = mysql_prep($game["game_id"]);
+
+			$query  = "INSERT IGNORE INTO users_games ("; 
+			$query .= " user_id, game_id, challenge";
+			$query .= ") VALUES (";
+			$query .= " {$user_id}, {$game_id}, '{$challenge}' ";
+			$query .= ")";
+			$result = mysqli_query($connection, $query); 
+			//$result will not be a typical variable. It will be a resource.
+
+			if ($result && mysqli_affected_rows($connection) >= 0) {
+				//Successs
+				$_SESSION["message"] .= "<br />Your list has been updated.";
+				redirect_to("add_game.php");
+			} else {
+				//Failure
+				$_SESSION["message"] .= "Game Not Entered. Please contact the webmaster for help";
+				redirect_to("add_game.php");
+		  } 
+		}
+		
+	}
+	
+	
+	//EXTERNAL API AND EMAIL FUNCTIONS
 	
 	function igdb_by_title($title) {
 		$url  = "https://www.igdb.com/api/v1/games";
@@ -664,7 +726,7 @@
 		// $mail->addBCC('bcc@example.com');
 
 		// $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-		//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+		// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 		$mail->isHTML(true);                                  // Set email format to HTML
 
 		$mail->Subject = $subject;

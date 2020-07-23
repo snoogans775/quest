@@ -1,11 +1,20 @@
-The Quest
-PHP Indexing tool for Reno Video Game Symphony
+#The Quest
+A "game club" platform for the Reno Video Game Symphony
 previously hosted at http://www.rvgsymphony.com/quest
 
-A user-submission interface to inspire critical thinking about video games and interactive media. 
+A user-submission interface to inspire critical thinking about interactive media. Users create lists. The lists serve to recommend titles for others. An personalized email newsletter keeps users up to date and invites users to participate in events.
+#How it works
+Create lists of favorite games. Play games from the lists. Write summaries and analyses.
 
-Users create lists of their favorite video games. The lists serve to recommend essential games for others to play.
+The Quest was an educational platform that ran from 2012-2016. For more information, contact Kevin Fredericks at kfrednv@gmail.com
 
-Conditions for completion of a game are defined by the owner of the list and completion includes a short analysis.
+#What needs help?
+Any forks are welcome. The site was made in vanilla PHP by a novice developer so it requires refactoring
 
-The Quest was an educational platform that ran from 2012-2016
+#Dependencies:
+PHP 5.3+
+MySQL
+Newsletter depends on PHPMailer library
+
+#Acknowledgments
+Thanks to Andrew Musselman for his help developing amusselm-gamequest, a Django prototype for this project.
