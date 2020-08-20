@@ -1,6 +1,5 @@
 # The Quest
 A "game club" platform for the Reno Video Game Symphony
-previously hosted at http://www.rvgsymphony.com/quest
 
 A user-submission interface to inspire critical thinking about interactive media. Users create lists. The lists serve to recommend titles for others. An personalized email newsletter keeps users up to date and invites users to participate in events.
 ## How it works
