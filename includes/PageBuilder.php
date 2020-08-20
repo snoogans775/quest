@@ -1,13 +1,48 @@
 <?php
 
+require_once('Database.php');
+require_once('functions.php');
+
 class PageBuilder
 {	
 	public function __construct()
 	{
 		$this->dom = new DOMDocument('1.0', 'utf-8');
+
+		$database = new Database();
+		$this->connection = $database->getConnection();
+
 	}
 	/**
-	* DOM object for page header
+	* DOM object for home
+	*
+	* @access private
+	* @return DOMDocument
+	*/
+	private function createHomepage()
+	{ 
+		$dom = $this->dom;
+
+        //Body container
+        $container = $dom->createElement('div');
+		$container->setAttribute('class', 'body-container');
+		
+		//Header
+		$header = $this->getHeader();
+
+		//Navbar
+		$navbar = $this->getNavbar();
+
+        //Nest the elements
+		$container->appendChild($header);
+		$container->appendChild($navbar);
+		$dom->appendChild($container);
+
+        return $dom;
+
+	}
+	/**
+	* DOM object for header
 	*
 	* @access private
 	* @return DOMNode
@@ -46,29 +81,34 @@ class PageBuilder
 
 	}
 	/**
-	* DOM object for home
-	*
+   	* Create Game List for Home
 	* @access private
-	* @return DOMDocument
-	*/
-	private function createHomepage()
-	{ 
-		$dom = $this->dom;
-
-        //Body container
-        $container = $dom->createElement('div');
-		$container->setAttribute('id', 'body-container');
-		
-		//Header
-		$header = $this->createHeader();
-
-        //Nest the elements
-		$container->appendChild($header);
-		$dom->appendChild($container);
-
-        return $dom;
-
-	}
+	* @return DOMNode
+   	*/
+	   private function createGameList($games)
+	   {
+		   $dom = $this->dom;
+   
+		   //Navbar container
+		   $container = $dom->createElement('div');
+		   $container->setAttribute('class', 'gamelist-container');
+   
+		   //List item for each page
+		   $list = $dom->createElement('ul');
+		   $list->setAttribute('class', 'navbar');
+   
+		   foreach($pages as $page)
+		   {
+			   //List item for each page
+			   $item = $dom->createElement('li', $page["menu_name"]);
+			   $list->appendChild($item);
+   
+		   }
+   
+		   $container->appendChild($list);
+   
+		   return $container;
+	   }
 	/**
 	* HTML to render for user login.
 	* @access private
@@ -151,14 +191,34 @@ class PageBuilder
 		';
 				
   	/**
-   	* HTML to render for navigation
-   	* @var navbarHTML
-   	* @access private
+   	* Create NavBar DOMNode
+	* @access private
+	* @return DOMNode
    	*/
-	private $navbar = 
-		'<div class="navbar">
-					<?php echo navigation($current_subject, $current_page); ?>
-			</div>';
+	private function createNavbar($pages)
+	{
+		$dom = $this->dom;
+
+        //Navbar container
+        $container = $dom->createElement('div');
+		$container->setAttribute('class', 'navbar-container');
+
+		//List item for each page
+		$list = $dom->createElement('ul');
+		$list->setAttribute('class', 'navbar');
+
+		foreach($pages as $page)
+		{
+			//List item for each page
+			$item = $dom->createElement('li', $page["menu_name"]);
+			$list->appendChild($item);
+
+		}
+
+		$container->appendChild($list);
+
+		return $container;
+	}
 	
 	public function getHeader(String $context='public')
 	{
@@ -167,12 +227,19 @@ class PageBuilder
 	
 	public function getLoginForm()
 	{
-		return $this->loginForm;
+		return $this->createLoginForm();
 	}
 	
-	public function getNavbar()
+	public function getNavbar() 
 	{
-		return $this->navbar;
+		$pages = [];
+		$page_set = find_all_subjects($this->connection);
+		while($page = mysqli_fetch_assoc($page_set))
+		{
+			array_push($pages, $page);
+		}
+
+		return $this->createNavbar($pages);
 	}
 	
 	public function getGreeting()
