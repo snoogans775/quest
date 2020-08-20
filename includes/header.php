@@ -16,10 +16,17 @@ $greeting  = $builder->getGreeting();
 $loginForm = $builder->getLoginForm();
 
 //Render Page components
-echo $header;
-	
 ?>
+<head>
+	<meta charset="utf-8">
+	<title>The Quest</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" type="text/css"
+	      href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer|Nunito|Averia+Sans+Libre">
+				<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+</head>
 <body>
+	<div class="page-container">
 <?php
 	echo $navbar;
 	if($loggedIn) 

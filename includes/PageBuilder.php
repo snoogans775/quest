@@ -19,6 +19,17 @@ class PageBuilder
 			</head>
 		';
 		
+  /**
+   * HTML to render for page banner
+   * @var banner
+   * @access protected
+   */
+	protected $banner = 
+		'
+			<div id="banner">
+				<a href="index.php"><img src="../public/images/quest_logo.png"></img></a>
+			</div>
+		';
 	/**
 	 * HTML t render for user login.
 	 * @var loginForm
@@ -94,6 +105,11 @@ class PageBuilder
 	public function getHeader(String $context)
 	{
 		return $this->header;
+	}
+	
+	public function geBanner()
+	{
+		return $this->banner;
 	}
 	
 	public function getLoginForm()
