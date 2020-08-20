@@ -11,16 +11,6 @@ a img {
 img {
     border:0;
 }
-/* .border {
-	position:relative;
-	margin: 0px 0;
-	-moz-box-shadow:    3px 3px 4px 0px #a3a3a3;
-	-webkit-box-shadow: 3px 3px 4px 0px #a3a3a3;
-	box-shadow:         3px 3px 4px 0px #a3a3a3;
-	border-top: 5px solid #9a9a9a;
-	background:#e3e3e3;
-	height: 100%;
-	} */
 html { 
   background: url(../images/dkc_bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -76,39 +66,6 @@ html {
 .navbar img { max-width: 120px; display: inline; float: left;
 }
 
-/*
-.navbar form input {
-	background:url(../images/bg-input.jpg) repeat-x;
-	border-bottom:1px solid #fefefe;
-	border-top:0;
-	border-left:1px solid #e4e4e4;
-	border-right:1px solid #e4e4e4;
-	width:172px;
-	padding:6px 5px;
-	color:#fefefe;
-	margin:0;
-	text-align:center;
-	text-shadow:0 1px 0 #000000;
-	font-size:12px;
-	letter-spacing:0.010em;
-	font-family: 'Conv_Muli-Regular';
-}
-.navbar form input#submit {
-	background: none #e6e6e6;
-	width:84px;
-	border-radius:5px;
-	border:1px solid #fff;
-	padding:0;
-	height:23px;
-	color:#767676;
-	font-family:Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-	text-transform:uppercase;
-	font-size:13px;
-	margin:12px 0 0;
-	cursor:pointer;
-	text-shadow:none;
-}
-*/
 .navbar p {
 	clear:both;
 	text-align:center;

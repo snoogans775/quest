@@ -33,6 +33,7 @@
 	function form_errors($errors=array()) {
 		$output = "";
 		if (!empty($errors)) {
+			$output .= "<font color=\"red\">";
 		  $output .= "<div class=\"error\">";
 		  $output .= "<ul>";
 		  foreach ($errors as $key => $error) {
@@ -42,6 +43,7 @@
 		  }
 		  $output .= "</ul>";
 		  $output .= "</div>";
+			$output .= "</font>";
 		}
 		return $output;
 	}

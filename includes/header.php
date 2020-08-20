@@ -1,4 +1,4 @@
-<?php ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); ?>
+<?php ini_set('error_reporting', E_ALL); ini_set('display_errors', 0); ?>
 <?php require_once("../includes/session.php"); ?>
 <?php require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>

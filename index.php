@@ -1,2 +1,2 @@
 <?php require_once("includes/functions.php"); ?>
-<?php redirect_to("public/"); ?>
+<?php redirect_to("./public/"); ?>
