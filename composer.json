@@ -1,0 +1,16 @@
+{
+    "name": "kevin/quest",
+    "description": "PHP 'game club'",
+    "type": "project",
+    "require-dev": {
+        "phpmailer/phpmailer": "^6.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Fredericks",
+            "email": "snoogans775@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,3 +1,10 @@
+html { 
+  background: url(../images/dkc_bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 body {
 	margin:0;
 } 
@@ -11,12 +18,45 @@ a img {
 img {
     border:0;
 }
-html { 
-  background: url(../images/dkc_bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+h1 {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	font-size: 32px;
+	font-weight: normal;
+	line-height: 34px;
+	text-decoration: none;
+	padding: 0 0 .2em 0;
+	margin: .1em 0 .1em 0;
+	color: #4d4d4d;
+}
+h2 {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	font-size: 26px;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #7d7d7d;
+	padding: 0;
+}
+h3 {
+	color: #919191;
+	font-family: Nunito, "Arial Narrow Bold", sans-serif;
+	font-size: 22px;
+	font-weight: normal;
+	line-height: 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #7d7d7d;
+	margin: 1em 0 1em 0;
+	left-margin: .5em;
+}
+p {
+	font-family: 'Averia Sans Libre';
+	text-align: justify;
+	margin: .2em 0 0 .4em;
+	width: 95%;
+	font-size: 17px;
+	line-height: 21px;
+	color: #4d4d4d;
 }
 /*------------------------- Fonts ------------------------*/
 @font-face {
@@ -40,7 +80,6 @@ html {
 	margin: 0 auto 0 0;
 }
 .navbar ul {
-	margin-top: 1px;
 	padding-left: 0;
 	list-style:none;
 }
@@ -135,62 +174,18 @@ html {
 }
 
 /*------------------------- Body ------------------------*/
-.body {
+.main-container {
 	overflow: hidden;
 	max-width: 760px;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
 	margin: 30px auto auto auto;
 	color: #444444;
 	background-color: white;
 }
-.body .footer {
+.main-container .footer {
 	float:left;
 	margin-top: 40px;
 	padding: 40px 0 0 0;
 	width: 100%;
-}
-.body div h1 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 32px;
-	font-weight: normal;
-	line-height: 34px;
-	text-decoration: none;
-	padding: 0 0 .2em 0;
-	margin: .1em 0 .1em 0;
-	color: #4d4d4d;
-}
-.body div h2 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 26px;
-	font-weight: normal;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	padding: 0;
-}
-.body div h3 {
-	color: #919191;
-	font-family: Nunito, "Arial Narrow Bold", sans-serif;
-	font-size: 22px;
-	font-weight: normal;
-	line-height: 20px;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	margin: 1em 0 1em 0;
-	left-margin: .5em;
-}
-.body p {
-	font-family: 'Averia Sans Libre';
-	text-align: justify;
-	margin: .2em 0 0 .4em;
-	width: 95%;
-	font-size: 17px;
-	line-height: 21px;
-	color: #4d4d4d;
 }
 
 /* PAGE styles */
@@ -337,7 +332,7 @@ html {
 	font-size: 18px;
 	letter-spacing: 0.10em;
 }
-.page  #commit_game form input{
+.page #commit_game form input{
 	width: 90%;
 	padding: 2px 3px;
 	margin: 2px 0 6px 0 ;
