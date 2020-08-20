@@ -1,11 +1,10 @@
 <?php 
-	ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); 
-	echo phpinfo();
 	include("../includes/header.php");
 ?>
 	<div class="page">
 		<font color="red">
-		<?php # Display any form errors
+		<?php 
+			# Display any form errors
 			echo form_errors($errors). $_SESSION["message"]; 
 			$_SESSION["message"] = "";
 		?>
@@ -16,7 +15,10 @@
 			} else {
 				include("home.php");
 			}
-		include("../includes/footer.php"); ?>
+		?>
+	<?php
+		include("../includes/footer.php"); 
+	?>
 	
 	</div>
 </body>
