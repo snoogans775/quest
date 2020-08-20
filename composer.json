@@ -12,5 +12,7 @@
             "email": "snoogans775@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "sunra/php-simple-html-dom-parser": "^1.5"
+    }
 }

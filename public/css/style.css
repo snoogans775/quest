@@ -1,6 +1,4 @@
-body {
-	margin:0;
-} 
+
 a {
 	outline:none;
 }
@@ -18,6 +16,46 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+h1 {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	font-size: 32px;
+	font-weight: normal;
+	line-height: 34px;
+	text-decoration: none;
+	padding: 0 0 .2em 0;
+	margin: .1em 0 .1em 0;
+	color: #4d4d4d;
+}
+h2 {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	font-size: 26px;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #7d7d7d;
+	padding: 0;
+}
+h3 {
+	color: #919191;
+	font-family: Nunito, "Arial Narrow Bold", sans-serif;
+	font-size: 22px;
+	font-weight: normal;
+	line-height: 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #7d7d7d;
+	margin: 1em 0 1em 0;
+	left-margin: .5em;
+}
+p {
+	font-family: 'Averia Sans Libre';
+	text-align: justify;
+	margin: .2em 0 0 .4em;
+	width: 95%;
+	font-size: 17px;
+	line-height: 21px;
+	color: #4d4d4d;
+}
 /*------------------------- Fonts ------------------------*/
 @font-face {
 	font-family: 'Conv_Muli-Italic';
@@ -34,7 +72,7 @@ html {
 	font-style: normal;
 }
 /*------------------------- Body ------------------------*/
-body .page-container {
+#body-container {
 	overflow: hidden;
 	max-width: 760px;
 	top: 0;
@@ -45,51 +83,11 @@ body .page-container {
 	color: #444444;
 	background-color: white;
 }
-.body .footer {
+.body-container .footer {
 	float:left;
 	margin-top: 40px;
 	padding: 40px 0 0 0;
 	width: 100%;
-}
-.body div h1 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 32px;
-	font-weight: normal;
-	line-height: 34px;
-	text-decoration: none;
-	padding: 0 0 .2em 0;
-	margin: .1em 0 .1em 0;
-	color: #4d4d4d;
-}
-.body div h2 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 26px;
-	font-weight: normal;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	padding: 0;
-}
-.body div h3 {
-	color: #919191;
-	font-family: Nunito, "Arial Narrow Bold", sans-serif;
-	font-size: 22px;
-	font-weight: normal;
-	line-height: 20px;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	margin: 1em 0 1em 0;
-	left-margin: .5em;
-}
-.body p {
-	font-family: 'Averia Sans Libre';
-	text-align: justify;
-	margin: .2em 0 0 .4em;
-	width: 95%;
-	font-size: 17px;
-	line-height: 21px;
-	color: #4d4d4d;
 }
 /*------------------------- Header ------------------------*/
 .navbar {

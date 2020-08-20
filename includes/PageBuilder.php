@@ -1,89 +1,122 @@
 <?php
 
-require_once('WebElement.php');
-
 class PageBuilder
 {	
 	public function __construct()
 	{
-		/**
-		* dom object to construct elements
-		* @var dom
-		* @access private
-		*/
-		$this->dom = new DOMDocument();
+		$this->dom = new DOMDocument('1.0', 'utf-8');
 	}
-  	/**
-   	* HTML to render fo <head>
-   	* @var headerHTML
-   	* @access private
-   	*/
-	private $header =
-		'
-			<head>
-				<meta charset="utf-8">
-				<title>The Quest</title>
-				<link rel="stylesheet" href="css/style.css" type="text/css">
-				<link rel="stylesheet" type="text/css"
-				      href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer|Nunito|Averia+Sans+Libre">
-							<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
-			</head>
-		';
-		
-  	/**
-   	* HTML to render for page banner
-   	* @var banner
-   	* @access private
-   	*/
-	private function createBanner()
+	/**
+	* DOM object for page header
+	*
+	* @access private
+	* @return DOMNode
+	*/
+	private function createHeader()
 	{ 
 		$dom = $this->dom;
 
-		$bannerDiv = $dom->createElement('div');
-		$bannerId = $dom->createAttribute('id');
-		$bannerId->value = 'banner';
-		$bannerDiv->appendChild($bannerId);
+        //Masthead container
+        $container = $dom->createElement('div');
+        $container->setAttribute('class', 'header');
 
-		$bannerDiv = $dom->createElement('a');
-		$bannerId = $dom->createAttribute('href');
-		$bannerId->value = './index.php';
-		$bannerDiv->appendChild($bannerId);
+        //Banner container
+        $banner = $dom->createElement('div');
+        $banner->setAttribute('id', 'banner');
 
-		$imgDiv = $dom->createElement('img');
-		$imgId = $dom->createAttribute('src');
-		$imgId->value = './images/quest_logo.png';
-		$imgDiv->appendChild($bannerId);
+        //Link to home
+        $link = $dom->createElement('a');
+        $link->setAttribute('href', './');
 
-		return $bannerDiv;
+        //Banner image
+        $image = $dom->createElement('img');
+		$image->setAttribute('src', './images/quest_logo.png');
+		
+		//Login
+		$login = $this->createLoginForm();
+
+        //Nest the elements
+        $link->appendChild($image);
+        $banner->appendChild($link);
+		$container->appendChild($banner);
+		$container->appendChild($login);
+        $dom->appendChild($container);
+
+        return $container;
+
+	}
+	/**
+	* DOM object for home
+	*
+	* @access private
+	* @return DOMDocument
+	*/
+	private function createHomepage()
+	{ 
+		$dom = $this->dom;
+
+        //Body container
+        $container = $dom->createElement('div');
+		$container->setAttribute('id', 'body-container');
+		
+		//Header
+		$header = $this->createHeader();
+
+        //Nest the elements
+		$container->appendChild($header);
+		$dom->appendChild($container);
+
+        return $dom;
 
 	}
 	/**
 	* HTML to render for user login.
-	* @var loginForm
 	* @access private
+	* @return DOMNode
 	*/
-	private $loginForm = 
-		'
-			<div class="header">
-				<div id="banner">
-					<a href="index.php"><img src="../public/images/quest_logo.png"></img></a>
-				</div>
-				<div class="login">
-					<form action="login.php" method="POST">
-						<input type="text" placeholder="username" name="username" /><br />
-						<input type="password" placeholder="password" name="password" /><br/>
-						<span>
-							<input type="submit" name="submit" value="login" />
-					</form>
-							<a href="new_user.php">&nbsp &nbsp New To The Quest?</a>
-						</span>
-				</div>
-				<div class="navbar">
-						<?php echo navigation($current_subject, $current_page); ?>
-				</div>
-			</div>
-			<hr />	
-		';
+	private function createLoginForm() { 
+		$dom = $this->dom;
+
+        //Body container
+        $container = $dom->createElement('div');
+		$container->setAttribute('class', 'login');
+		
+		//Login Form
+		$form = $dom->createElement('form');
+		$form->setAttribute('action', 'login.php');
+		$form->setAttribute('method', 'POST');
+
+		//Username
+		$user = $dom->createElement('input');
+		$user->setAttribute('type', 'text');
+		$user->setAttribute('placeholder', 'username');
+		$user->setAttribute('name', 'username');
+
+		//Password
+		$password = $dom->createElement('input');
+		$password->setAttribute('type', 'password');
+		$password->setAttribute('placeholder', 'password');
+		$password->setAttribute('name', 'password');
+
+		//Submit
+		$submit = $dom->createElement('input');
+		$submit->setAttribute('type', 'submit');
+		$submit->setAttribute('value', 'login');
+		$submit->setAttribute('name', 'submit');
+
+		//Signup
+		$signup = $dom->createElement('a');
+		$signup->setAttribute('href', 'new_user.php');
+
+        //Nest the elements
+		$form->appendChild($user);
+		$form->appendChild($password);
+		$form->appendChild($submit);
+		$container->appendChild($form);
+		$container->appendChild($signup);
+
+        return $container;
+	}
 		
   	/**
    	* HTML to render for logged in users.
@@ -127,14 +160,9 @@ class PageBuilder
 					<?php echo navigation($current_subject, $current_page); ?>
 			</div>';
 	
-	public function getHeader(String $context)
+	public function getHeader(String $context='public')
 	{
-		return $this->header;
-	}
-	
-	public function getBanner()
-	{
-		return $this->createBanner();
+		return $this->createHeader();
 	}
 	
 	public function getLoginForm()
@@ -150,6 +178,11 @@ class PageBuilder
 	public function getGreeting()
 	{
 		return $this->greeting;
+	}
+	public function getHomepage()
+	{
+		return $this->createHomepage();
+		
 	}
 }
 
