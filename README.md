@@ -1,9 +1,5 @@
 #The Quest
-<<<<<<< HEAD
 A "game club" platform for the Reno Video Game Symphony
-=======
-PHP Indexing tool for Reno Video Game Symphony
->>>>>>> 63e108db31f662d815bc8f93faaf0b8aeccd358f
 previously hosted at http://www.rvgsymphony.com/quest
 
 A user-submission interface to inspire critical thinking about interactive media. Users create lists. The lists serve to recommend titles for others. An personalized email newsletter keeps users up to date and invites users to participate in events.
@@ -13,7 +9,7 @@ Create lists of favorite games. Play games from the lists. Write summaries and a
 The Quest was an educational platform that ran from 2012-2016. For more information, contact Kevin Fredericks at kfrednv@gmail.com
 
 #What needs help?
-Any forks are welcome. The site was made in vanilla PHP by a novice developer so it requires refactoring
+Any pulls are welcome. The site was made in vanilla PHP so everything is right there for you to change.
 
 #Dependencies:
 PHP 5.3+
