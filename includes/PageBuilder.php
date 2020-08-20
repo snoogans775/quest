@@ -1,13 +1,24 @@
 <?php
 
+require_once('WebElement.php');
+
 class PageBuilder
 {	
-  /**
-   * HTML to render fo <head>
-   * @var headerHTML
-   * @access protected
-   */
-	protected $header =
+	public function __construct()
+	{
+		/**
+		* dom object to construct elements
+		* @var dom
+		* @access private
+		*/
+		$this->dom = new DOMDocument();
+	}
+  	/**
+   	* HTML to render fo <head>
+   	* @var headerHTML
+   	* @access private
+   	*/
+	private $header =
 		'
 			<head>
 				<meta charset="utf-8">
@@ -19,23 +30,39 @@ class PageBuilder
 			</head>
 		';
 		
-  /**
-   * HTML to render for page banner
-   * @var banner
-   * @access protected
-   */
-	protected $banner = 
-		'
-			<div id="banner">
-				<a href="index.php"><img src="../public/images/quest_logo.png"></img></a>
-			</div>
-		';
+  	/**
+   	* HTML to render for page banner
+   	* @var banner
+   	* @access private
+   	*/
+	private function createBanner()
+	{ 
+		$dom = $this->dom;
+
+		$bannerDiv = $dom->createElement('div');
+		$bannerId = $dom->createAttribute('id');
+		$bannerId->value = 'banner';
+		$bannerDiv->appendChild($bannerId);
+
+		$bannerDiv = $dom->createElement('a');
+		$bannerId = $dom->createAttribute('href');
+		$bannerId->value = './index.php';
+		$bannerDiv->appendChild($bannerId);
+
+		$imgDiv = $dom->createElement('img');
+		$imgId = $dom->createAttribute('src');
+		$imgId->value = './images/quest_logo.png';
+		$imgDiv->appendChild($bannerId);
+
+		return $bannerDiv;
+
+	}
 	/**
-	 * HTML t render for user login.
-	 * @var loginForm
-	 * @access protected
-	 */
-	protected $loginForm = 
+	* HTML to render for user login.
+	* @var loginForm
+	* @access private
+	*/
+	private $loginForm = 
 		'
 			<div class="header">
 				<div id="banner">
@@ -58,12 +85,12 @@ class PageBuilder
 			<hr />	
 		';
 		
-  /**
-   * HTML to render for logged in users.
-   * @var greeting
-   * @access protected
-   */	
-	protected $greeting = 
+  	/**
+   	* HTML to render for logged in users.
+   	* @var greeting
+   	* @access private
+   	*/	
+	private $greeting = 
 		'
 			<div class="header">
 				<div id="banner">
@@ -90,26 +117,24 @@ class PageBuilder
 			<hr />	
 		';
 				
-  /**
-   * HTML to render for navigation
-   * @var navbarHTML
-   * @access protected
-   */
-	protected $navbar = 
-		'
-			<div class="navbar">
+  	/**
+   	* HTML to render for navigation
+   	* @var navbarHTML
+   	* @access private
+   	*/
+	private $navbar = 
+		'<div class="navbar">
 					<?php echo navigation($current_subject, $current_page); ?>
-			</div>
-		';
+			</div>';
 	
 	public function getHeader(String $context)
 	{
 		return $this->header;
 	}
 	
-	public function geBanner()
+	public function getBanner()
 	{
-		return $this->banner;
+		return $this->createBanner();
 	}
 	
 	public function getLoginForm()
