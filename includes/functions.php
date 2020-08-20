@@ -149,11 +149,9 @@
 	
 	// USER FUNCTIONS //
 	
-	function find_all_users() {
-		global $connection;
+	function find_all_users($connection) {
 		$query = "SELECT * ";
 		$query .= "FROM users ";
-		// $query .= "ORDER BY id ASC";
 		$user_set = mysqli_query($connection, $query);
 		confirm_query($user_set);	
 		return $user_set;
@@ -440,10 +438,9 @@
 		return $output;
 	}
 	
-	function find_list_by_user($user_id) {
+	function find_list_by_user($connection, $user_id) {
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
-		// wasn't. I really do. Oh have I tried to fix this.
-		global $connection;
+		// wasn't. I really do.
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
 		
 		$query  = "SELECT DISTINCT games.* ";
