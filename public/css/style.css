@@ -1,6 +1,7 @@
 body {
-	margin:0;
-} 
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+}
+
 a {
 	outline:none;
 }
@@ -12,12 +13,60 @@ img {
     border:0;
 }
 html { 
-  background: url(../images/dkc_bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+	
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
 }
+h1 {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	font-size: 2.2em;
+	font-weight: normal;
+	line-height: 34px;
+	text-decoration: none;
+	padding: 0 0 .2em 0;
+	margin: .1em 0 .1em 0;
+	color: #4d4d4d;
+}
+h2 {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	font-size: 2.6em;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #7d7d7d;
+	padding: 0;
+}
+h3 {
+	color: #919191;
+	font-family: Nunito, "Arial Narrow Bold", sans-serif;
+	font-size: 2.2em;
+}
+p {
+	font-family: 'Averia Sans Libre';
+	text-align: justify;
+	margin: .2em 0 0 .4em;
+	width: 95%;
+	font-size: 17px;
+	line-height: 21px;
+	color: #4d4d4d;
+}
+
+.body-container {
+	overflow: hidden;
+	max-width: 80%;
+	margin: 2em auto;
+	color: #444444;
+	background-color: white;
+}
+.footer {
+	float:left;
+	margin-top: 40px;
+	padding: 2em 0 0 0;
+	width: 100%;
+}
+
 /*------------------------- Fonts ------------------------*/
 @font-face {
 	font-family: 'Conv_Muli-Italic';
@@ -33,36 +82,31 @@ html {
 	font-weight: normal;
 	font-style: normal;
 }
+
 /*------------------------- Header ------------------------*/
-.navbar {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	float: left;
-	margin: 0 auto 0 0;
+.navbar-container {
+	display: flex-box;
 }
-.navbar ul {
-	margin-top: 1px;
+.navbar-container ul {
+	margin-top: 0.2em;
 	padding-left: 0;
 	list-style:none;
 }
-.navbar ul li {
+.navbar-container ul li {
 	display: inline;
 	color: #677592;
-	padding: .5em .5em 0 .5em;
-	margin:.5em .7em 0 0;
+	padding: .2em .2em;
+	margin-right: 0.5em;
 	border: 1px solid;
+	font-style: bold;
+	color:#677592;
+	text-transform:uppercase;
+	line-height:2em;
 }
-.navbar ul li.selected a, .navbar ul li a:hover {
+.selected, .navbar ul li a:hover {
 	color:#6b6b6b;
 }
-.navbar ul li a {
-	font-style: bold;
-	font-size:26px;
-	color:#677592;
-	font-weight:normal;
-	text-transform:uppercase;
-	text-decoration:none;
-	line-height:30px;
-}
+
 .navbar img { max-width: 120px; display: inline; float: left;
 }
 
@@ -77,33 +121,25 @@ html {
 	letter-spacing:0.001em;
 }
 .header {
-	overflow:hidden;
-	padding: 0 0 .2em 0;
-}
-.header #banner img {
+	overflow: hidden;
+	display: inline-flex;
 	float: left;
-	margin-left: auto;
-	margin-right: auto;
+}
+.header a img {
 	max-width: 100%;
+	margin-right: 0.5em;
 }
 .header form {
-	float: left;
-	margin: 1px 0;
+	margin: 0.2em 0;
+	max-width: 40%;
 	text-align: left;
 }
 .header .login {
 	font-family: Nunito, "Arial Narrow Bold", sans-serif;
 	font-size: 12px;
 	color:#666666;
-	float:right;
 	text-decoration: none;
-	margin: .1em .2em;
-	padding: .5em 1.5em;
 }
-.header .login a {
-	font-size: 14px;
-	color:#666666;
-	text-decoration: none;
 }
 .header .login form input[type=text], .header .login form input[type=password] {
 	float: right;
@@ -134,71 +170,11 @@ html {
 	padding: 0 2em;
 }
 
-/*------------------------- Body ------------------------*/
-.body {
-	overflow: hidden;
-	max-width: 760px;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	margin: 30px auto auto auto;
-	color: #444444;
-	background-color: white;
-}
-.body .footer {
-	float:left;
-	margin-top: 40px;
-	padding: 40px 0 0 0;
-	width: 100%;
-}
-.body div h1 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 32px;
-	font-weight: normal;
-	line-height: 34px;
-	text-decoration: none;
-	padding: 0 0 .2em 0;
-	margin: .1em 0 .1em 0;
-	color: #4d4d4d;
-}
-.body div h2 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 26px;
-	font-weight: normal;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	padding: 0;
-}
-.body div h3 {
-	color: #919191;
-	font-family: Nunito, "Arial Narrow Bold", sans-serif;
-	font-size: 22px;
-	font-weight: normal;
-	line-height: 20px;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	margin: 1em 0 1em 0;
-	left-margin: .5em;
-}
-.body p {
-	font-family: 'Averia Sans Libre';
-	text-align: justify;
-	margin: .2em 0 0 .4em;
-	width: 95%;
-	font-size: 17px;
-	line-height: 21px;
-	color: #4d4d4d;
-}
-
 /* PAGE styles */
 .page {
 	overflow:hidden;
 	position: relative;
 	font-family: 'Averia Sans Libre';
-	padding: 0 2em;
 	margin: 0 auto 0 auto;
 }  
 .page a {
@@ -210,10 +186,10 @@ html {
 	padding: .5em;
 	margin: 0;
 	float: left;
-  outline: 1px solid #ddd;
-  border-top: 1px solid #fff;
-  padding: 5px;
-  background: #f0f0f0; 
+  	outline: 1px solid #ddd;
+  	border-top: 1px solid #fff;
+  	padding: 5px;
+  	background: #f0f0f0; 
 	max-width: 30%;
 }
 .page #search input [type=text] {
@@ -266,10 +242,8 @@ html {
 	line-height: 14px;
 	border: 0px none;
 }
-.page ul {
-	margin: 0 .5em 0 0;
-	padding-left: 1em;
-	max-width: 200px;
+.gamelist-container {
+	max-width: 50%;
 }
 .page .frame {
 	color: #555555;
@@ -277,8 +251,9 @@ html {
   border-top: 3px solid #fff;
   padding: 2px;
 }
-.page ul li {
+.list .title {
 	font-family: Nunito, "Arial Narrow Bold", sans-serif;
+	font-size: 6vmin;
 	list-style: none;
 	display: block;
 	border: 1px solid #7d7d7d;
@@ -287,11 +262,23 @@ html {
 	margin: .3em 0;
 	background: white;
 }
-.page ul li img {
-	float: left;
-	padding-right: 2px;
+
+.list ul {
+	padding: 0;
 }
-/* USED IN TAGS FORMS */	
+.follow-button {
+	float: left;
+	padding-right: 0.3em;
+}
+.dropdown {
+	display: none;
+}
+li:hover .dropdown {
+	width: 95%;
+	font-size: 12px;
+	display: block;
+	padding: .2em .4em;
+	margin: 0;
 }
 .page label {
 	float: left;
@@ -300,16 +287,7 @@ html {
 	float: left;
 	width: 20px;
 }
-.page .drop_content {
-	display: none;
-}
-.page ul li:hover .drop_content {
-	width: 95%;
-	font-size: 12px;
-	display: block;
-	padding: .2em .4em;
-	margin: 0;
-}
+
 .page .add_challenge {
 	background: #f0f0f0;
 	display: none;

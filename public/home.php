@@ -22,7 +22,7 @@
 			display_list_by_platform();
 			
 		} else {
-	// Display all lists, listing users in order of user_id
+			// Display all lists, listing users in order of user_id
 			$user_set = find_all_users();
 			while($user = mysqli_fetch_assoc($user_set)) {
 				$current_user = mysqli_fetch_assoc(find_list_by_user($user["id"]));

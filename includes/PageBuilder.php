@@ -12,6 +12,11 @@ class PageBuilder
 		$database = new Database();
 		$this->connection = $database->getConnection();
 
+<<<<<<< HEAD
+=======
+		$this->root = "/quest/public/";
+
+>>>>>>> dev
 	}
 	/**
 	* DOM object for home
@@ -33,9 +38,19 @@ class PageBuilder
 		//Navbar
 		$navbar = $this->getNavbar();
 
+<<<<<<< HEAD
         //Nest the elements
 		$container->appendChild($header);
 		$container->appendChild($navbar);
+=======
+		//Gamelist
+		$gamelist = $this->getGameList();
+
+        //Nest the elements
+		$container->appendChild($header);
+		$container->appendChild($navbar);
+		$container->appendChild($gamelist);
+>>>>>>> dev
 		$dom->appendChild($container);
 
         return $dom;
@@ -85,6 +100,7 @@ class PageBuilder
 	* @access private
 	* @return DOMNode
    	*/
+<<<<<<< HEAD
 	   private function createGameList($games)
 	   {
 		   $dom = $this->dom;
@@ -109,6 +125,82 @@ class PageBuilder
    
 		   return $container;
 	   }
+=======
+	private function createGameList($user_set)
+	{
+		$dom = $this->dom;
+
+		//Gamelist container
+		$container = $dom->createElement('div');
+		$container->setAttribute('class', 'gamelist-container');
+
+		//List item for each page
+		$list = $dom->createElement('div');
+		$list->setAttribute('class', 'list');
+
+		while($user = mysqli_fetch_assoc($user_set)) {
+			$currentList = find_list_by_user($this->connection, $user["id"]);
+
+			//Create an element to hold the list of games for the user
+			$userList = $dom->createElement('ul', $user["username"]);
+			
+			//Add an entry for every game in the currentList
+			while($game = mysqli_fetch_assoc($currentList))
+			{
+				//Create entry
+				$entry = $this->createListEntry($game);
+
+				//Add entry to list
+				$userList->appendChild($entry);
+			}
+
+			
+			$list->appendChild($userList);
+		}
+	
+
+		$container->appendChild($list);
+
+		return $container;
+	}
+
+	/**
+	* Node for entries in a gamelist
+	* @access private
+	* @param mysqliObject
+	* @return DOMNode
+	*/
+	private function createListEntry($game) {
+		$dom = $this->dom;
+		
+		$gameTitle = $dom->createTextNode(htmlentities($game["title"]));
+
+		$listEntry = $dom->createElement('li');
+		$listEntry->setAttribute('class', 'title');		
+		
+		$followLink = $dom->createElement('a');
+		$followLink->setAttribute('href', 'follow_game.php?game_id="' .$game["game_id"]. '"');
+		$followLink->setAttribute('onClick', 'return confirm("Follow this game?")');
+		$followLinkImg = $dom->createElement('img');
+		$followLinkImg->setAttribute('class', 'follow-button');
+		$followLinkImg->setAttribute('src', $this->root.'images/follow_button.jpg');
+
+		//Construct drop-down content
+		$dropDown = $dom->createElement('div');
+		$dropDown->setAttribute('class', 'dropdown');
+		$dropDownText = $dom->createTextNode("Platform: " .htmlentities($game["platform"]));
+		$dropDown->appendChild($dropDownText);
+
+		//Construct entry
+		$followLink->appendChild($followLinkImg);
+		$listEntry->appendChild($gameTitle);
+		$listEntry->appendChild($followLink);
+		$listEntry->appendChild($dropDown);
+
+		return $listEntry;
+	}
+
+>>>>>>> dev
 	/**
 	* HTML to render for user login.
 	* @access private
@@ -219,6 +311,18 @@ class PageBuilder
 
 		return $container;
 	}
+<<<<<<< HEAD
+=======
+
+	//--------------GETTERS---------------//
+
+	public function getGameList() 
+	{
+		$user_set = find_all_users($this->connection);
+
+		return $this->createGameList($user_set);
+	}
+>>>>>>> dev
 	
 	public function getHeader(String $context='public')
 	{
@@ -241,6 +345,7 @@ class PageBuilder
 
 		return $this->createNavbar($pages);
 	}
+<<<<<<< HEAD
 	public function getGameList() 
 	{
 		$gamelist = [];
@@ -256,6 +361,8 @@ class PageBuilder
 
 		return $this->createGameList($games);
 	}
+=======
+>>>>>>> dev
 	
 	public function getGreeting()
 	{
