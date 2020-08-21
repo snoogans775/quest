@@ -24,6 +24,7 @@
 	$homepage = $builder->getHomepage();
 
 	echo $homepage->saveHTML();
+	echo $builder->root;
 
 ?>
 
@@ -34,12 +35,6 @@
 			$_SESSION["message"] = "";
 		?>
 		</font>
-		<?php # Display menu item for navigation
-			if(isset($current_subject)) { 
-				include("{$current_subject["menu_name"]}.php"); 
-			} else {
-				include("home.php");
-			}
 		include("../includes/footer.php"); ?>
 	
 	</div>

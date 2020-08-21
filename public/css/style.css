@@ -175,7 +175,6 @@ p {
 	overflow:hidden;
 	position: relative;
 	font-family: 'Averia Sans Libre';
-	padding: 0 2em;
 	margin: 0 auto 0 auto;
 }  
 .page a {
@@ -187,10 +186,10 @@ p {
 	padding: .5em;
 	margin: 0;
 	float: left;
-  outline: 1px solid #ddd;
-  border-top: 1px solid #fff;
-  padding: 5px;
-  background: #f0f0f0; 
+  	outline: 1px solid #ddd;
+  	border-top: 1px solid #fff;
+  	padding: 5px;
+  	background: #f0f0f0; 
 	max-width: 30%;
 }
 .page #search input [type=text] {
@@ -243,10 +242,8 @@ p {
 	line-height: 14px;
 	border: 0px none;
 }
-.page ul {
-	margin: 0 .5em 0 0;
-	padding-left: 1em;
-	max-width: 200px;
+.gamelist-container {
+	max-width: 50%;
 }
 .page .frame {
 	color: #555555;
@@ -254,8 +251,9 @@ p {
   border-top: 3px solid #fff;
   padding: 2px;
 }
-.page ul li {
+.list .title {
 	font-family: Nunito, "Arial Narrow Bold", sans-serif;
+	font-size: 6vmin;
 	list-style: none;
 	display: block;
 	border: 1px solid #7d7d7d;
@@ -264,11 +262,24 @@ p {
 	margin: .3em 0;
 	background: white;
 }
-.page ul li img {
-	float: left;
-	padding-right: 2px;
-}
 
+.list ul {
+	padding: 0;
+}
+.follow-button {
+	float: left;
+	padding-right: 0.3em;
+}
+.dropdown {
+	display: none;
+}
+li:hover .dropdown {
+	width: 95%;
+	font-size: 12px;
+	display: block;
+	padding: .2em .4em;
+	margin: 0;
+}
 .page label {
 	float: left;
 }
@@ -276,16 +287,7 @@ p {
 	float: left;
 	width: 20px;
 }
-.page .drop_content {
-	display: none;
-}
-.page ul li:hover .drop_content {
-	width: 95%;
-	font-size: 12px;
-	display: block;
-	padding: .2em .4em;
-	margin: 0;
-}
+
 .page .add_challenge {
 	background: #f0f0f0;
 	display: none;

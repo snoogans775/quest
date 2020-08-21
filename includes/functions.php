@@ -148,8 +148,7 @@
 	
 	// USER FUNCTIONS //
 	
-	function find_all_users() {
-		global $connection;
+	function find_all_users($connection) {
 		$query = "SELECT * ";
 		$query .= "FROM users ";
 		// $query .= "ORDER BY id ASC";
@@ -196,7 +195,7 @@
 	// - the current subject array or null
 	// - the current page array or null
 	
-	function navigation($subject_array, $page_array) {
+	function navigation($subject_array) {
 		global $layout_context;
 		$output = "";
 		if ($layout_context == "public") {
@@ -224,6 +223,7 @@
 	}
 	
 	function login_form() {
+		$output = '';
 
 		if (!isset($_SESSION["username"])) { 
 			//FIXME: SPAN IS ACROSS ANOTHER TAG
@@ -300,10 +300,9 @@
 		return $game_set;
 	}
 	
-	function find_list_item($user_id, $game_id, $table="users_games") {
+	function find_list_item($connection, $user_id, $game_id, $table="users_games") {
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
 		// wasn't. I really do. Changing it simply does not jibe with these functions for some reason.
-		global $connection;
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
 		$safe_game_id = mysqli_real_escape_string($connection, $game_id);
 		
@@ -380,10 +379,9 @@
 		return $output;
 	}
 	
-	function find_list_by_user($user_id) {
+	function find_list_by_user($connection, $user_id) {
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
-		// wasn't. I really do. Oh have I tried to fix this.
-		global $connection;
+		// wasn't. I really do.
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
 		
 		$query  = "SELECT DISTINCT games.* ";
@@ -395,7 +393,8 @@
 		$query .= "WHERE id = {$safe_user_id} " ;
 		$game_set = mysqli_query($connection, $query);
 		confirm_query($game_set);
-			return $game_set;
+		
+		return $game_set;
 	}
 	
 	function find_list_item_by_game($game_id, $table="users_games") {
@@ -447,8 +446,8 @@
 			} // End of if isset($_POST["submit"])
 	}
 	
-	function display_list($user_id, $public = true) {
-		$game_set = find_list_by_user($user_id);
+	function display_list($connection, $user_id, $public = true) {
+		$game_set = find_list_by_user($connection, $user_id);
 
 			$output = "<ul>";
 			while($game = mysqli_fetch_assoc($game_set)) {
@@ -468,7 +467,7 @@
 				$output .= "<div class=\"drop_content\">"; 
 				$output .= "Platform: " .htmlentities($game["platform"]);  //Platform for game, not unique to user
 				// Returns list item for this user only
-				$list_item = mysqli_fetch_assoc(find_list_item($user_id, $game["game_id"]));
+				$list_item = mysqli_fetch_assoc(find_list_item($connection, $user_id, $game["game_id"]));
 				if ($list_item["challenge"]) {
 				$output .= "<br />";
 				$output .= "Challenge: " .htmlentities($list_item["challenge"]);
