@@ -1,8 +1,17 @@
 <?php
 
+require_once('Validator.php');
+require_once('Encryptor.php');
+
 class Database 
 {
-	public function getConnection() 
+	public function __construct()
+	{
+		$this->connection = null;
+		$this->errors = array();
+	}
+
+	static public function getConnection() 
 	{
 
 		define("DB_SERVER", "localhost");
@@ -29,6 +38,65 @@ class Database
 		$subject_set = mysqli_query($connection, $query);
 		confirm_query($subject_set);	
 		return $subject_set;
+	}
+
+	private function validate($postData)
+	{
+		$validator = new Validator();
+		$validator->setPostData($postData);
+
+		//validations
+		$validator->validate_presences();	
+		$validator->validate_max_lengths();
+		$validator->validate_email();
+		$validator->match_passwords("password", "password_confirm");
+
+		$this->updateErrors($validator->getErrors());
+
+	}
+
+	private function insertUser($postData) 
+	{
+		$encryptor = new Encryptor();
+		$username = mysql_prep($this->connection, $postData["username"]);
+		$email = mysql_prep($this->connection, $postData["email"]);
+		$hashed_password = $encryptor::password_encrypt($_POST["password"]);
+
+		//performs database query
+		$query  = "INSERT INTO users ("; 
+		$query .= " username, hashed_password, points, email, date_joined";
+		$query .= ") VALUES (";
+		$query .= " '{$username}', '{$hashed_password}', 400, '{$email}', NOW() ";
+		$query .= ")";
+		$result = mysqli_query($this->connection, $query); 
+		
+		//$result is a mysqli resource
+		if ($result && mysqli_affected_rows($this->connection) >= 0) {
+			//Success
+			$_SESSION["message"] = "Account Created.";
+			redirect_to('index.php');
+		} else {
+			//Failure
+			$_SESSION["message"] = "Registration failed.";
+			redirect_to("new_user.php");
+		}
+			
+	}
+	private function updateErrors($err) 
+	{
+		$this->errors = $err;
+	}
+	public function setDefaultConnection()
+	{
+		$this->connection = $this->getConnection();
+	}
+	public function addUser($postData)
+	{
+		$this->validate($postData);
+		if( empty($this->errors) )
+		{
+			$this->insertUser($postData);
+		}
 	}
 }	
 ?>
