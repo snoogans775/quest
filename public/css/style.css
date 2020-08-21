@@ -107,8 +107,7 @@ p {
 	color:#6b6b6b;
 }
 
-.navbar img { max-width: 120px; display: inline; float: left;
-}
+.navbar img { max-width: 120px; display: inline; }
 
 .navbar p {
 	clear:both;
@@ -139,7 +138,6 @@ p {
 	font-size: 12px;
 	color:#666666;
 	text-decoration: none;
-}
 }
 .header .login form input[type=text], .header .login form input[type=password] {
 	float: right;

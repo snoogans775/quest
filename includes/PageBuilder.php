@@ -12,11 +12,8 @@ class PageBuilder
 		$database = new Database();
 		$this->connection = $database->getConnection();
 
-<<<<<<< HEAD
-=======
 		$this->root = "/quest/public/";
 
->>>>>>> dev
 	}
 	/**
 	* DOM object for home
@@ -38,11 +35,6 @@ class PageBuilder
 		//Navbar
 		$navbar = $this->getNavbar();
 
-<<<<<<< HEAD
-        //Nest the elements
-		$container->appendChild($header);
-		$container->appendChild($navbar);
-=======
 		//Gamelist
 		$gamelist = $this->getGameList();
 
@@ -50,7 +42,6 @@ class PageBuilder
 		$container->appendChild($header);
 		$container->appendChild($navbar);
 		$container->appendChild($gamelist);
->>>>>>> dev
 		$dom->appendChild($container);
 
         return $dom;
@@ -100,32 +91,6 @@ class PageBuilder
 	* @access private
 	* @return DOMNode
    	*/
-<<<<<<< HEAD
-	   private function createGameList($games)
-	   {
-		   $dom = $this->dom;
-   
-		   //Navbar container
-		   $container = $dom->createElement('div');
-		   $container->setAttribute('class', 'gamelist-container');
-   
-		   //List item for each page
-		   $list = $dom->createElement('ul');
-		   $list->setAttribute('class', 'navbar');
-   
-		   foreach($pages as $page)
-		   {
-			   //List item for each page
-			   $item = $dom->createElement('li', $page["menu_name"]);
-			   $list->appendChild($item);
-   
-		   }
-   
-		   $container->appendChild($list);
-   
-		   return $container;
-	   }
-=======
 	private function createGameList($user_set)
 	{
 		$dom = $this->dom;
@@ -154,11 +119,9 @@ class PageBuilder
 				$userList->appendChild($entry);
 			}
 
-			
 			$list->appendChild($userList);
 		}
 	
-
 		$container->appendChild($list);
 
 		return $container;
@@ -172,7 +135,7 @@ class PageBuilder
 	*/
 	private function createListEntry($game) {
 		$dom = $this->dom;
-		
+
 		$gameTitle = $dom->createTextNode(htmlentities($game["title"]));
 
 		$listEntry = $dom->createElement('li');
@@ -200,7 +163,6 @@ class PageBuilder
 		return $listEntry;
 	}
 
->>>>>>> dev
 	/**
 	* HTML to render for user login.
 	* @access private
@@ -311,8 +273,6 @@ class PageBuilder
 
 		return $container;
 	}
-<<<<<<< HEAD
-=======
 
 	//--------------GETTERS---------------//
 
@@ -322,7 +282,6 @@ class PageBuilder
 
 		return $this->createGameList($user_set);
 	}
->>>>>>> dev
 	
 	public function getHeader(String $context='public')
 	{
@@ -345,24 +304,6 @@ class PageBuilder
 
 		return $this->createNavbar($pages);
 	}
-<<<<<<< HEAD
-	public function getGameList() 
-	{
-		$gamelist = [];
-		$user_set = find_all_users($this->connection);
-		while($user = mysqli_fetch_assoc($user_set)) {
-			$current_user = mysqli_fetch_assoc(find_list_by_user($user["id"]));
-			if (!empty($current_user)) {
-				echo $user["username"];
-				echo display_list($user["id"]);
-				array_push()
-			}
-		}
-
-		return $this->createGameList($games);
-	}
-=======
->>>>>>> dev
 	
 	public function getGreeting()
 	{
