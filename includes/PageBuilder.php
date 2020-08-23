@@ -1,6 +1,7 @@
 <?php
 
 require_once('Database.php');
+require_once('Validator.php');
 require_once('functions.php');
 
 class PageBuilder
@@ -9,10 +10,11 @@ class PageBuilder
 	{
 		$this->dom = new DOMDocument('1.0', 'utf-8');
 
-		$database = new Database();
-		$this->connection = $database::getConnection();
-
 		$this->root = "/quest/public/";
+
+		$this->connection = Database::getConnection();
+
+		$this->loggedIn = Authenticator::loggedIn();
 
 	}
 	/**
@@ -217,21 +219,21 @@ class PageBuilder
 	* @access private
 	* @return DOMNode
 	*/	
-	private function createErrorModal() {
-		'<font color="red">
-		<?php # Display any form errors
-			echo form_errors($errors). $_SESSION["message"]; 
-			$_SESSION["message"] = "";
-		?>
-		</font>';
+	private function createErrorModal(array $errors) {
+		
+		$validator = new Validator();
+		$errorModal = $validator->formatErrors($errors); 
+		return $errorModal;
 	}
 		
-  	/**
-   	* HTML to render for logged in users.
+	/**
+   	* HTML to render for 
 	* @access private
 	* @return DOMNode
-   	*/	
+	*/
 	private function createGreeting() {
+		
+		$dom = $this->dom;
 		'
 			<div class="header">
 				<div id="banner">
