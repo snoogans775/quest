@@ -15,4 +15,8 @@ class Controller
     public function getPage() {
         return $this->currentPage;
     }
+    static public function redirect($url) {
+        echo "<script type='text/javascript'> document.location = '{$url}'; </script>";
+        exit;
+    }
 }
