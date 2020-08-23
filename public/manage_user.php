@@ -33,11 +33,5 @@
 
 			?>
 	</div>
-	<?php /*
-		if(isset($_SESSION["user_id"])) { 
-			include("{$current_subject["menu_name"]}.php"); 
-		} else {
-			include("home.php");
-		} */ ?>
 <?php include("../includes/footer.php"); ?>
 </div>

@@ -1,6 +1,13 @@
-<?php session_start();
+<?php 
+
+class Session {
+
+	function __construct()
+	{
+		session_start();
+	}
 	
-	function message() {
+	public function getMessage() {
 		if(isset($_SESSION["message"])) {
 		$output  = "<div class=\"message\">";
 		$output .= htmlentities($_SESSION["message"]);
@@ -12,7 +19,7 @@
 	  }
 	}
 	
-	function errors() {
+	public function getErrors() {
 		if(isset($_SESSION["errors"])) {
 			$errors = $_SESSION["errors"];
 			
@@ -20,4 +27,5 @@
 			return $errors;
 		}
 	}
+}
 ?>

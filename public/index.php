@@ -1,11 +1,8 @@
+<?php require_once("../includes/Session.php"); ?>
 <?php ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); ?>
 <?php require '../vendor/autoload.php'; ?>
-<?php require_once("../includes/session.php"); ?>
-<?php //require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
-<?php require_once("../includes/validation_functions.php"); ?>
 <?php require_once("../includes/PageBuilder.php"); ?>
-<?php require_once("../includes/Controller.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +16,11 @@
 <body>
 
 <?php
+	session_start();
+	print_r( $_SESSION);
 	$builder = new PageBuilder();
 
-	$home = $builder->getHomePage();
+	$home = $builder->getHomepage();
 
 	echo $home->saveHTML();
 ?>
