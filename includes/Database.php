@@ -2,6 +2,7 @@
 
 require_once('Validator.php');
 require_once('Encryptor.php');
+require_once('Controller.php');
 
 class Database 
 {
@@ -31,7 +32,7 @@ class Database
 		return $connection;
 	}
 
-	public function find_all_subjects($connection) {
+	public function find_all_subjects(object $connection) {
 		$query = "SELECT * ";
 		$query .= "FROM subjects ";
 		$query .= "ORDER BY position ASC";
@@ -40,7 +41,12 @@ class Database
 		return $subject_set;
 	}
 
-	private function validate($postData)
+	private function mysql_prep(object $connection, string $string) {
+		$escaped_string = mysqli_real_escape_string($connection, $string);
+		return $escaped_string;
+	}
+
+	private function validate(array $postData)
 	{
 		$validator = new Validator();
 		$validator->setPostData($postData);
@@ -55,12 +61,13 @@ class Database
 
 	}
 
-	private function insertUser($postData) 
+	private function insertUser(array $postData) 
 	{
+		$controller = new Controller();
 		$encryptor = new Encryptor();
-		$username = mysql_prep($this->connection, $postData["username"]);
-		$email = mysql_prep($this->connection, $postData["email"]);
-		$hashed_password = $encryptor::password_encrypt($_POST["password"]);
+		$username = $this->mysql_prep($this->connection, $postData["username"]);
+		$email = $this->mysql_prep($this->connection, $postData["email"]);
+		$hashed_password = $encryptor->password_encrypt($_POST["password"]);
 
 		//performs database query
 		$query  = "INSERT INTO users ("; 
@@ -74,15 +81,15 @@ class Database
 		if ($result && mysqli_affected_rows($this->connection) >= 0) {
 			//Success
 			$_SESSION["message"] = "Account Created.";
-			redirect_to('index.php');
+			$controller::redirect('index.php');
 		} else {
 			//Failure
 			$_SESSION["message"] = "Registration failed.";
-			redirect_to("new_user.php");
+			$controller::redirect("new_user.php");
 		}
 			
 	}
-	private function updateErrors($err) 
+	private function updateErrors(array $err) 
 	{
 		$this->errors = $err;
 	}
@@ -90,7 +97,7 @@ class Database
 	{
 		$this->connection = $this->getConnection();
 	}
-	public function addUser($postData)
+	public function addUser(array $postData)
 	{
 		$this->validate($postData);
 		if( empty($this->errors) )
