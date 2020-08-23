@@ -4,9 +4,8 @@
 <?php //require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
 <?php require_once("../includes/validation_functions.php"); ?>
-<?php require_once("../includes/PageBuilder.php");
-?>
-<?php find_selected_page(); ?>
+<?php require_once("../includes/PageBuilder.php"); ?>
+<?php require_once("../includes/Controller.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,22 +20,11 @@
 
 <?php
 	$builder = new PageBuilder();
-	$homepage = $builder->getHomepage();
 
-	echo $homepage->saveHTML();
-	echo $builder->root;
+	$home = $builder->getHomePage();
 
+	echo $home->saveHTML();
 ?>
 
-<div class="page">
-		<font color="red">
-		<?php # Display any form errors
-			echo form_errors($errors). $_SESSION["message"]; 
-			$_SESSION["message"] = "";
-		?>
-		</font>
-		include("../includes/footer.php"); ?>
-	
-	</div>
 </body>
 </html>

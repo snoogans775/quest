@@ -8,8 +8,7 @@
 		exit;
 	}
 	
-	function mysql_prep($string) {
-		global $connection;
+	function mysql_prep($connection, $string) {
 		$escaped_string = mysqli_real_escape_string($connection, $string);
 		return $escaped_string;
 	}
@@ -194,12 +193,12 @@
 	// - the current subject array or null
 	// - the current page array or null
 	
-	function navigation($subject_array) {
+	function navigation($connection, $subject_array) {
 		global $layout_context;
 		$output = "";
 		if ($layout_context == "public") {
 			$output .= "<ul class=\"navbar\">";
-			$subject_set = find_all_subjects();
+			$subject_set = find_all_subjects($connection);
 			while($subject = mysqli_fetch_assoc($subject_set)) {
 				$output .= "<li";
 				// $subject_array is the first argument for this function, it will be the current subject
@@ -221,7 +220,7 @@
 		}
 	}
 	
-	function login_form() {
+	function login_form($current_user) {
 		$output = '';
 
 		if (!isset($_SESSION["username"])) { 
@@ -250,7 +249,7 @@
 										<a href="manage_user.php?id=<?php echo $_SESSION["user_id"]; ?>">Your Quest</a>
 									</span>';
 		}
-		return $ouput;
+		return $output;
 	}
 
 	//QUEST DATABASE FUNCTIONS //
@@ -525,7 +524,7 @@
 	
 	function check_confirmation($safe_user_id, $safe_source_user_id, $safe_game_id) {
 		global $connection;
-		$query .= "SELECT * FROM completion_commits ";
+		$query = "SELECT * FROM completion_commits ";
 		$query .= "WHERE user_id = {$safe_user_id} " ;
 		$query .= "AND game_id = {$safe_game_id} ";
 		$query .= "AND source_user_id = {$safe_source_user_id} ";
@@ -543,7 +542,7 @@
 	
 	//LIST MODIFY FUNCTIONS
 	
-	function add_game_to_list($title, $platform, $challenge = "") {
+	function add_game_to_list($connection, $title, $platform, $challenge = "") {
 		$required_fields = array("title", "platform");
 		validate_presences($required_fields);
 	
@@ -598,6 +597,23 @@
 		  } 
 		}
 		
+	}
+
+	function leaderBoard($connection) {
+		$query = "SELECT * ";
+		$query .= "FROM users ";
+		$query .= "ORDER BY points DESC ";
+		// $query .= "LIMIT 5";
+		$user_set = mysqli_query($connection, $query);
+		confirm_query($user_set);
+		if (mysqli_affected_rows($connection) >= 1) {
+			echo '<br />';
+			while($user = mysqli_fetch_assoc($user_set)) {
+				if ($user['points'] > 400) {
+					echo $user['username']. '  :  '. $user['points']. '<br />';					
+				}
+			}	
+		}
 	}
 	
 	
@@ -680,6 +696,7 @@
 		    $_SESSION["message"] .= "Message has been sent. ";
 		}
 	}
+
 	
 	//PASSWORD AND LOGIN FUNCTIONS //
 	

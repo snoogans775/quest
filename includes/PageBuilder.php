@@ -10,7 +10,7 @@ class PageBuilder
 		$this->dom = new DOMDocument('1.0', 'utf-8');
 
 		$database = new Database();
-		$this->connection = $database->getConnection();
+		$this->connection = $database::getConnection();
 
 		$this->root = "/quest/public/";
 
@@ -199,7 +199,7 @@ class PageBuilder
 		$submit->setAttribute('name', 'submit');
 
 		//Signup
-		$signup = $dom->createElement('a');
+		$signup = $dom->createElement('a', 'New User?');
 		$signup->setAttribute('href', 'new_user.php');
 
         //Nest the elements
@@ -211,13 +211,27 @@ class PageBuilder
 
         return $container;
 	}
+
+	/**
+   	* HTML to render for errors.
+	* @access private
+	* @return DOMNode
+	*/	
+	private function createErrorModal() {
+		'<font color="red">
+		<?php # Display any form errors
+			echo form_errors($errors). $_SESSION["message"]; 
+			$_SESSION["message"] = "";
+		?>
+		</font>';
+	}
 		
   	/**
    	* HTML to render for logged in users.
-   	* @var greeting
-   	* @access private
+	* @access private
+	* @return DOMNode
    	*/	
-	private $greeting = 
+	private function createGreeting() {
 		'
 			<div class="header">
 				<div id="banner">
@@ -243,7 +257,7 @@ class PageBuilder
 			</div>
 			<hr />	
 		';
-				
+	}	
   	/**
    	* Create NavBar DOMNode
 	* @access private
@@ -264,8 +278,12 @@ class PageBuilder
 		foreach($pages as $page)
 		{
 			//List item for each page
-			$item = $dom->createElement('li', $page["menu_name"]);
-			$list->appendChild($item);
+			$listItem = $dom->createElement('li');
+			$link = $dom->createElement('a', $page["menu_name"]);
+			$link->setAttribute('href', $this->root . $page["menu_name"] . '.php');
+			
+			$listItem->appendChild($link);
+			$list->appendChild($listItem);
 
 		}
 
@@ -312,7 +330,6 @@ class PageBuilder
 	public function getHomepage()
 	{
 		return $this->createHomepage();
-		
 	}
 }
 
