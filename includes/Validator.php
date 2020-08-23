@@ -1,4 +1,5 @@
 <?php 
+declare(strict_types = 1);
 
 class Validator
 {
@@ -9,7 +10,9 @@ class Validator
         $this->fields_with_max_lengths = array("username" => 30);
     }
 
-    public function fieldname_as_text($fieldname) {
+    // Conversion
+
+    public function fieldname_as_text(String $fieldname) {
         $fieldname = str_replace("_", " ", $fieldname);
         $fieldname = ucfirst($fieldname);
         return $fieldname;
@@ -17,7 +20,7 @@ class Validator
             
     // Presence
 
-    public function has_presence($value) {
+    public function has_presence(String $value) {
         return isset($value) && $value !== "";
     }
 
@@ -31,8 +34,8 @@ class Validator
     }
 
     //String Length
-    public function has_max_length($value, $max) {
-        return strlen($value <= $max);
+    public function has_max_length(string $value, int $max) {
+        return strlen($value) <= $max;
     }
 
     public function validate_max_lengths() {
@@ -55,23 +58,49 @@ class Validator
             }
     }
     //Matching values
-    public function match_passwords($pass, $pass_confirm) {
+    public function match_passwords(string $pass, string $pass_confirm) {
         if ($this->postData[$pass] !== $this->postData[$pass_confirm]) {
             $this->errors[] = "Passwords are not the same.";
         }
     }
 
     //Inclusion in a set
-    public function has_inclusion_in($value, $set) {
+    public function has_inclusion_in(string $value, array $set) {
         return in_array($value, $set);
     }
+
+    //Format errors
+    /** 
+    * Convert eror array to renderable HTML Node
+    * @param Array $errors
+    * @return DOMNode
+    */
+    public static function formatErrors(Array $errors) 
+    {
+        $dom = new DOMDocument();
+        if( !empty($errors)) {
+            $container = $dom->createElement('div');
+            $container->setAttribute('class', 'error');
+
+            $ul = $dom->createElement('ul');
+            foreach( $errors as $key=>$err) {
+                $content = htmlentities($err);
+                $li = $dom->createElement('li', $content);
+                $ul->appendChild($li);
+            }
+
+            $container->appendChild($ul);
+        }
+
+        return $container;
+	}
 
     //Getters and Setters
     public function getErrors() {
         return $this->errors;
     }
 
-    public function setPostData($post) {
+    public function setPostData(array $post) {
         $this->postData = $post;
     }
 }
