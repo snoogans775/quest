@@ -1,8 +1,8 @@
-<?php require_once("../includes/Session.php"); ?>
+<?php require_once("../src/Session.php"); ?>
 <?php ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); ?>
 <?php require '../vendor/autoload.php'; ?>
-<?php require_once("../includes/functions.php"); ?>
-<?php require_once("../includes/PageBuilder.php"); ?>
+<?php require_once("../src/functions.php"); ?>
+<?php require_once("../src/PageBuilder.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>

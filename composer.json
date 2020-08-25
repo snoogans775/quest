@@ -14,8 +14,10 @@
     ],
     "require": {
         "sunra/php-simple-html-dom-parser": "^1.5"
-    }
+    },
 		"autoload": {
-			"classmap": ["includes"]
+			"psr-4": {
+				"quest\\": "public/"
+			}
 		}
 }
