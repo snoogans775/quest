@@ -1,7 +1,7 @@
 <?php ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); ?>
 <?php 
-	require __DIR__ . '/vendor/autoload.php'; 
-	use Quest\PageBuilder;
+	require __DIR__ . '/vendor/autoload.php';
+	include 'src/Builder/PageBuilder.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,8 +18,7 @@
 <?php
 	session_start();
 	print_r( $_SESSION);
-	$builder = new PageBuilder();
-
+	$builder = new Quest\Builder\PageBuilder();
 	$home = $builder->getHomepage();
 
 	echo $home->saveHTML();

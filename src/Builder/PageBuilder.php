@@ -1,19 +1,17 @@
 <?php
-namespace Quest;
-use DOMDocument;
-use Quest\Database;
+namespace Quest\Builder;
 
 class PageBuilder
 {	
 	public function __construct()
 	{
-		$this->dom = new DOMDocument('1.0', 'utf-8');
+		$this->dom = new \DOMDocument('1.0', 'utf-8');
 
 		$this->root = "/quest/public/";
 
-		$this->connection = Database::getConnection();
+		$this->connection = \Quest\Database::getConnection();
 
-		$this->loggedIn = Authenticator::loggedIn();
+		$this->loggedIn = \Quest\Authenticator::loggedIn();
 
 	}
 	
@@ -73,7 +71,7 @@ class PageBuilder
 
         //Banner image
         $image = $dom->createElement('img');
-		$image->setAttribute('src', __DIR__ . '/../public/images/quest_logo.png');
+		$image->setAttribute('src', 'public/images/quest_logo.png');
 		
 		//Login
 		$login = $this->createLoginForm();
@@ -106,7 +104,7 @@ class PageBuilder
 		$list->setAttribute('class', 'list');
 
 		while($user = mysqli_fetch_assoc($user_set)) {
-			$currentList = Database::find_list_by_user($this->connection, $user["id"]);
+			$currentList = \Quest\Database::find_list_by_user($this->connection, $user["id"]);
 
 			//Create an element to hold the list of games for the user
 			$userList = $dom->createElement('ul', $user["username"]);
@@ -222,7 +220,7 @@ class PageBuilder
 	*/	
 	private function createErrorModal(array $errors) {
 		
-		$validator = new Validator();
+		$validator = new \Quest\Validator();
 		$errorModal = $validator->formatErrors($errors); 
 		return $errorModal;
 	}
@@ -299,7 +297,7 @@ class PageBuilder
 
 	public function getGameList() 
 	{
-		$user_set = Database::find_all_users($this->connection);
+		$user_set = \Quest\Database::find_all_users($this->connection);
 
 		return $this->createGameList($user_set);
 	}
@@ -317,7 +315,7 @@ class PageBuilder
 	public function getNavbar() 
 	{
 		$pages = [];
-		$page_set = Database::find_all_subjects($this->connection);
+		$page_set = \Quest\Database::find_all_subjects($this->connection);
 		while($page = mysqli_fetch_assoc($page_set))
 		{
 			array_push($pages, $page);

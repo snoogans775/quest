@@ -1,5 +1,5 @@
 <?php
-namespace Quest;
+namespace Quest\Builder;
 
 interface Builder
 {
