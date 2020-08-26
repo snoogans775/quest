@@ -1,6 +1,5 @@
 <?php
-
-namespace quest\includes;
+namespace Quest;
 
 require_once('Validator.php');
 require_once('Encryptor.php');
@@ -34,13 +33,81 @@ class Database
 		return $connection;
 	}
 
-	public function find_all_subjects(object $connection) {
+	static public function confirm_query($result_set) {
+		if (!$result_set) {
+			die("Database query failed.");
+		}
+	}
+
+	static public function find_list_by_user($connection, $user_id) {
+		// games.game_id is the only column in the database that uses this naming scheme. I wish it
+		// wasn't. I really do.
+		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
+		
+		$query  = "SELECT DISTINCT games.* ";
+		$query .= "FROM games ";
+		$query .= "INNER JOIN users_games ";
+		$query .= "ON games.game_id = users_games.game_id ";
+		$query .= "INNER JOIN users ";
+		$query .= "ON users.id = users_games.user_id ";
+		$query .= "WHERE id = {$safe_user_id} " ;
+		$game_set = mysqli_query($connection, $query);
+		self::confirm_query($game_set);
+		
+		return $game_set;
+	}
+
+	static public function find_all_subjects(object $connection) {
 		$query = "SELECT * ";
 		$query .= "FROM subjects ";
 		$query .= "ORDER BY position ASC";
 		$subject_set = mysqli_query($connection, $query);
-		confirm_query($subject_set);	
+		self::confirm_query($subject_set);	
 		return $subject_set;
+	}
+
+	// USER FUNCTIONS //
+
+	static public function find_all_users($connection) {
+		$query = "SELECT * ";
+		$query .= "FROM users ";
+		$user_set = mysqli_query($connection, $query);
+		self::confirm_query($user_set);	
+		return $user_set;
+	}
+	
+	static public function find_user_by_id($user_id) {
+		global $connection;
+
+		$query  = "SELECT * ";
+		$query .= "FROM users ";
+		$query .= "WHERE id = {$user_id} ";
+		$query .= "LIMIT 1";
+		$user_set = mysqli_query($connection, $query);
+		self::confirm_query($user_set);	
+		if($user = mysqli_fetch_assoc($user_set)) {
+			return $user;
+		} else {
+			return null;
+		}
+	}
+	
+	static public function find_user_by_username($username) {
+		global $connection;
+		
+		$safe_user = mysqli_real_escape_string($connection, $username);
+
+		$query  = "SELECT * ";
+		$query .= "FROM users ";
+		$query .= "WHERE username = '{$safe_user}' ";
+		$query .= "LIMIT 1";
+		$user_set = mysqli_query($connection, $query);
+		self::confirm_query($user_set);	
+		if($user = mysqli_fetch_assoc($user_set)) {
+			return $user;
+		} else {
+			return null;
+		}
 	}
 
 	private function mysql_prep(object $connection, string $string) {

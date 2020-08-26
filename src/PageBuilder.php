@@ -1,6 +1,7 @@
 <?php
-
-namespace quest\includes;
+namespace Quest;
+use DOMDocument;
+use Quest\Database;
 
 class PageBuilder
 {	
@@ -15,6 +16,7 @@ class PageBuilder
 		$this->loggedIn = Authenticator::loggedIn();
 
 	}
+	
 	/**
 	* DOM object for home
 	*
@@ -71,7 +73,7 @@ class PageBuilder
 
         //Banner image
         $image = $dom->createElement('img');
-		$image->setAttribute('src', './images/quest_logo.png');
+		$image->setAttribute('src', __DIR__ . '/../public/images/quest_logo.png');
 		
 		//Login
 		$login = $this->createLoginForm();
@@ -104,7 +106,7 @@ class PageBuilder
 		$list->setAttribute('class', 'list');
 
 		while($user = mysqli_fetch_assoc($user_set)) {
-			$currentList = find_list_by_user($this->connection, $user["id"]);
+			$currentList = Database::find_list_by_user($this->connection, $user["id"]);
 
 			//Create an element to hold the list of games for the user
 			$userList = $dom->createElement('ul', $user["username"]);
@@ -139,8 +141,9 @@ class PageBuilder
 		$gameTitle = $dom->createTextNode(htmlentities($game["title"]));
 
 		$listEntry = $dom->createElement('li');
-		$listEntry->setAttribute('class', 'title');		
-		
+		$listEntry->setAttribute('class', 'title');
+
+		//Construct follow button
 		$followLink = $dom->createElement('a');
 		$followLink->setAttribute('href', 'follow_game.php?game_id="' .$game["game_id"]. '"');
 		$followLink->setAttribute('onClick', 'return confirm("Follow this game?")');
@@ -296,7 +299,7 @@ class PageBuilder
 
 	public function getGameList() 
 	{
-		$user_set = find_all_users($this->connection);
+		$user_set = Database::find_all_users($this->connection);
 
 		return $this->createGameList($user_set);
 	}
@@ -314,7 +317,7 @@ class PageBuilder
 	public function getNavbar() 
 	{
 		$pages = [];
-		$page_set = find_all_subjects($this->connection);
+		$page_set = Database::find_all_subjects($this->connection);
 		while($page = mysqli_fetch_assoc($page_set))
 		{
 			array_push($pages, $page);

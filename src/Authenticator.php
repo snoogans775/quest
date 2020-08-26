@@ -1,6 +1,7 @@
 <?php
+namespace Quest;
 
-namespace quest\includes;
+require_once("Validator.php");
 
 class Authenticator {
 

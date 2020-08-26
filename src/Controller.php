@@ -1,6 +1,5 @@
 <?php
-
-namespace quest\includes;
+namespace Quest;
 
 class Controller 
 {

@@ -1,4 +1,5 @@
 <?php
+namespace Quest;
 
 interface Builder
 {

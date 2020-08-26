@@ -1,6 +1,5 @@
-<?php 
-
-namespace quest\includes;
+<?php
+namespace Quest;
 
 class Session 
 {
