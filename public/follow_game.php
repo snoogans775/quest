@@ -4,16 +4,15 @@
 <?php require_once("../includes/validation_functions.php"); ?>
 
 <?php
+	global $connection;
 	if (!isset($_SESSION["user_id"])) {
 		$_SESSION["message"] .= "Please log in before following a game";
-		redirect_to("index.php");
 	} else {
 		// Inserts into relational table. This identifies which games the user is currently following.	
-		// Once again, game is the only table that uses the syntax game_id. Sigh.
+		// Once again, game is the only table that uses the syntax game_id.
 		$user_id = mysql_prep($_SESSION["user_id"]);
 		$game_id = mysql_prep($_GET["game_id"]);
 		$game = find_game_by_id($game_id);
-		// echo $user_id. $game_id;
 		
 		$query  = "INSERT INTO currently_following ("; 
 		$query .= " user_id, game_id ";
@@ -27,12 +26,10 @@
 			//Successs
 			$safe_title = htmlspecialchars($game["title"]);
 			$_SESSION["message"] .= "You are now following {$safe_title}.";
-			redirect_to("index.php");
 		} else {
 			//Failure
-			$_SESSION["message"] .= "Game Follow failed. You may have already added this game. ";
-			redirect_to("index.php");
-			
+			$_SESSION["message"] .= "Game Follow failed. Something went wrong. ";	
 	  }
+		redirect_to("index.php");
 	}
 ?>

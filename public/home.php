@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 <h1>The Quest has Ended</h1>
 </div>
+=======
+<h1>The Quest has Risen!</h1>
+>>>>>>> heroku-dev
 <div id="content">
 	<div> 
 		<form action="" method="POST">

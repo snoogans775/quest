@@ -1,9 +1,15 @@
 <?php
+<<<<<<< HEAD
 //print_r(getenv());
 
 define("DB_SERVER", "localhost");
 define("DB_USER", "quest_admin");
 define("DB_PASS", "Koj1is#1");
+=======
+define("DB_SERVER", "quest.db");
+define("DB_USER", "snoogans775");
+define("DB_PASS", "+Pe5Qr6%unC-i");
+>>>>>>> heroku-dev
 define("DB_NAME", "quest");
 	//creates a database connection
 	$connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);

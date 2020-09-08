@@ -310,7 +310,7 @@
 		$query .= "AND game_id = {$safe_game_id} ";
 		$game_set = mysqli_query($connection, $query);
 		confirm_query($game_set);
-			return $game_set;
+		return $game_set;
 	}
 	
 	function find_followed_games_by_user($user_id) {
@@ -355,14 +355,14 @@
 				// Dregs up the info of the users that have listed the game.
 				$list_item_set = find_list_item_by_game($game["game_id"]);
 				while($list_item = mysqli_fetch_assoc($list_item_set)) {
-					$output .= "<table><tr><td>";
+					$output .= "<ul><li>";
+					//Find users that submitted game
 					$user = find_user_by_id($list_item["user_id"]);
 					$output .= htmlentities($user["username"]). "";
 					$output .= ($list_item["challenge"]) ? " (". htmlentities($list_item["challenge"]). ")" : "";
-					$output .= "</td>";
-					$output .= "</tr></table>";
+					$output .= "</li>";
+					$output .= "</ul>";
 				}
-				$output .= "Platform:<br />&nbsp&nbsp" .htmlentities($game["platform"]). "<br />";
 
 				// Security vulnerability. using cURL could make this better.
 				 $output .= "<br /><form action=\"delete_follow.php\" method =\"POST\">
@@ -377,7 +377,28 @@
 		return $output;
 	}
 	
+<<<<<<< HEAD
 	function find_list_by_user($connection, $user_id) {
+=======
+	function display_completed_games($user_id) {
+		$completion_set = find_completed_games($_SESSION["user_id"]);
+		$output = '';
+		if( mysqli_num_rows($completion_set) == 0) {
+			$output .= 'You have not completed any games';
+		} else {
+			$output .=  '<ul>';
+			while ($completion = mysqli_fetch_assoc($completion_set)) {
+				$game = find_game_by_id($completion["game_id"]);
+				$output .=  '<li>'. $game["title"]. '</li>';
+			}
+			$output .=  '</ul>';
+		}
+		
+		echo $output;
+	}
+	
+	function find_list_by_user($user_id) {
+>>>>>>> heroku-dev
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
 		// wasn't. I really do.
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
@@ -491,7 +512,7 @@
 		$query = "SELECT DISTINCT * ";
 		$query .= "FROM completion_commits ";
 		$query .= "WHERE user_id = $user_id ";
-		$query .= "AND confirmed = 1 ";
+		//$query .= "AND confirmed = 1 ";
 		$asset = mysqli_query($connection, $query);
 		confirm_query($asset);	
 		if ($asset) {
@@ -542,46 +563,52 @@
 	
 	//LIST MODIFY FUNCTIONS
 	
+<<<<<<< HEAD
 	function add_game_to_list($connection, $title, $platform, $challenge = "") {
+=======
+	function add_game_to_list($title, $platform, $challenge = "") {
+		global $connection;
+>>>>>>> heroku-dev
 		$required_fields = array("title", "platform");
 		validate_presences($required_fields);
 	
 		$fields_with_max_lengths = array("title" => 40, "challenge" => 20);
 		validate_max_lengths($fields_with_max_lengths);
 	
-		$game = find_game_by_title($_POST["title"]);
-		$title = mysql_prep($_POST["title"]); // Use the user-submitted title
-		$platform = mysql_prep($_POST["platform"]); // Use the user-submitted platform
-		$challenge = mysql_prep($_POST["challenge"]);
-	
 		// Inserts game data into user's list, returns existing id if game already exists
 		if (empty($errors)) {
-			// Makes sure the game has not been entered already. This does not check for misspellings. It only checks the string as provided by the user.
-				$query  = "INSERT INTO games ("; 
-				$query .= " title, platform";
-				$query .= ") VALUES (";
-				$query .= " '{$title}', '{$platform}' ";
-				$query .= ")";
-				$result = mysqli_query($connection, $query); 
+			$new_game = find_game_by_title($title);
+			$title = mysql_prep($title); // Use the user-submitted title
+			$platform = mysql_prep($platform); // Use the user-submitted platform
+			$challenge = mysql_prep($challenge);
 		
-				if ($result && mysqli_affected_rows($connection) >= 0) {
-					//Success
-					$safe_title = htmlspecialchars($title);
-					$_SESSION["message"] = "{$safe_title} added to database. "; 
-				} else {
-					//Failure
-					$_SESSION["message1"] = "Game Already Entered into database. ";
-				}
-			// Inserts into relational table. This identifies the game with the user.	
-			// Once again, game is the only table that uses the syntax game_id.
-			$game = find_game_by_title($_POST["title"]);
+			//Users_games table specific variables
 			$user_id = mysql_prep($_SESSION["user_id"]);
-			$game_id = mysql_prep($game["game_id"]);
+			//$game_id = mysql_prep($new_game["game_id"]);
+			
+			// Makes sure the game has not been entered already.
+			$query  = "INSERT INTO games ("; 
+			$query .= "title, platform";
+			$query .= ") VALUES (";
+			$query .= " '{$title}', '{$platform}' ";
+			$query .= ")";
+			$result = mysqli_query($connection, $query); 
+
+			if ($result && mysqli_affected_rows($connection) >= 0) {
+				//Success
+				$safe_title = htmlspecialchars($title);
+				$_SESSION["message1"] = "{$safe_title} added to database. "; 
+			} else {
+				//Failure
+				$_SESSION["message1"] = "Game already in database. ";
+			}
+			
+			//Add game to user's list
 
 			$query  = "INSERT IGNORE INTO users_games ("; 
 			$query .= " user_id, game_id, challenge";
 			$query .= ") VALUES (";
-			$query .= " {$user_id}, {$game_id}, '{$challenge}' ";
+			$query .= " {$user_id}, 100, '{$challenge}' ";
 			$query .= ")";
 			$result = mysqli_query($connection, $query); 
 			//$result will not be a typical variable. It will be a resource.
@@ -589,12 +616,11 @@
 			if ($result && mysqli_affected_rows($connection) >= 0) {
 				//Successs
 				$_SESSION["message"] .= "<br />Your list has been updated.";
-				redirect_to("add_game.php");
 			} else {
 				//Failure
 				$_SESSION["message"] .= "Game Not Entered. Please contact the webmaster for help";
-				redirect_to("add_game.php");
-		  } 
+		  }
+			//redirect_to("add_game.php"); 
 		}
 		
 	}

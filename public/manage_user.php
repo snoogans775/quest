@@ -14,24 +14,8 @@
 		<?php 
 			echo display_followed_games($_SESSION["user_id"]);
 		?>
-		<hr />
 		<h2>Completed Games</h2>
-			<!-- ><p>୧༼ಠ益ಠ༽୨ <br /> がんばって！</p> -->
-			<?php
-			$completion_set = find_completed_games($_SESSION["user_id"]);
-			if( mysqli_num_rows($completion_set) == 0) {
-				echo 'You have not completed any games';
-			} else {
-				echo mysqli_num_rows($completion_set). ' Games Completed';
-				echo '<ul>';
-				while ($completion = mysqli_fetch_assoc($completion_set)) {
-					$game = find_game_by_id($completion["game_id"]);
-					echo '<li>'. $game["title"]. '</li>';
-				}
-				echo '</ul>';
-			}
-
-			?>
+			<?php display_completed_games($_SESSION["user_id"]); ?>
 	</div>
 <?php include("../includes/footer.php"); ?>
 </div>

@@ -1,5 +1,11 @@
 <div class = "blog">
-	<h3>It's almost over</h3>
+	<h2>The Quest 2: The Return</h2>
+	<p><i>September 4, 2020</i></p>
+	<p>Hey look at you! Three years since the last update. It is nice to have you here, have fun!
+	-Kevin
+</div>
+<div class = "blog">
+	<h2>It's almost over</h2>
 	<p><i>December 23, 2017</i></p>
 	<p>We have played some games. The Quest is now in wintry wonderland mode, and we'll be having a little party in Reno, NV to celebrate and review the games we've played and what we've gained. Anybody with a registered account will be receiving a private email with the location and date. Thanks y'all!
 	-Kevin

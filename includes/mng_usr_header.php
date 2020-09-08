@@ -15,9 +15,10 @@
 	<link rel="stylesheet" type="text/css"
 	      href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer|Nunito|Averia+Sans+Libre">
 				<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+				<meta name="viewport" content="width=device-width, initial-scale=1"> 
 </head>
 <body>
-	<div class="body">
+	<div id="body-container">
 		<div class="header">
 			<div id="banner">
 				<a href="index.php"><img src="../public/images/quest_logo.png"></img></a>
@@ -35,7 +36,7 @@
 					</span>
 			<?php } else { ?> 
 				<span id="greeting">
-					Hello, <?php echo $_SESSION["username"]; ?> 
+					<?php echo $_SESSION["username"]; ?> 
 				</span>
 				<span id="logout">
 					<a href="logout.php">Logout</a>
