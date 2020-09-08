@@ -9,7 +9,7 @@ img {
     border:0;
 }
 html { 
-  background: url(../images/dkc_bg.jpg) no-repeat center center fixed; 
+  background: url(../images/rygar_bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -59,14 +59,14 @@ p {
 #body-container {
 	overflow: hidden;
 	max-width: 760px;
-	margin: 30px auto auto auto;
+	margin: 0 auto;
 	color: #444444;
 	background-color: white;
 }
 .footer {
 	float:left;
 	margin-top: 40px;
-	padding: 40px 0 0 0;
+	padding: 2em 0;
 	width: 100%;
 }
 
@@ -93,15 +93,15 @@ p {
 	margin: 0 auto 0 0;
 }
 .navbar ul {
-	margin-top: 1px;
+	margin-top: 0.2em;
 	padding-left: 0;
 	list-style:none;
 }
 .navbar ul li {
-	display: inline;
+	display: inline-block;
 	color: #677592;
-	padding: .5em .5em 0 .5em;
-	margin:.5em .7em 0 0;
+	padding: .2em .2em 0 .2em;
+	margin:.5em .2em 0 0;
 	border: 1px solid;
 }
 .navbar ul li.selected a, .navbar ul li a:hover {
@@ -109,7 +109,7 @@ p {
 }
 .navbar ul li a {
 	font-style: bold;
-	font-size:26px;
+	font-size: 1rem;
 	color:#677592;
 	font-weight:normal;
 	text-transform:uppercase;
@@ -215,14 +215,13 @@ p {
 }
 .page #content {
 	overflow-y: scroll;
-	padding: 1em 2em 4em 0;
+	padding: 0.2em;
 	margin: 0;
 	float: left;
   outline: 1px solid #ddd;
   border-top: 1px solid #fff;
-  padding-left: 1em;
   background: #f0f0f0; 
-	max-width: 70%;
+	max-width: 50%;
 	max-height: 400px;
 }
 .page #menu {
@@ -245,10 +244,10 @@ p {
 	float:right;
 	text-align: right;
 }
-.page .blog {
+.page #blog {
 	float:left;
 	margin: 0em 1em;
-	width: 50%;
+	min-width: 30%;
 }
 .page .blog p {
 	font-size: 14px;
@@ -262,7 +261,7 @@ p {
 .page ul {
 	margin: 0 .5em 0 0;
 	padding-left: 1em;
-	max-width: 200px;
+	max-width: 90%;
 }
 .page .frame {
 	color: #555555;
@@ -335,4 +334,13 @@ p {
 	padding: 2px 3px;
 	margin: 2px 0 6px 0 ;
 	font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+  #body-container {
+    max-width: 100%;
+  }
+	.page #content {
+		min-width: 100%;
+	}
 }
