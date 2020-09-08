@@ -1,32 +1,5 @@
-<h1>The Quest is Underway</h1>
-
-<!-- This can be implemented into the header image for a really neat effect.
-<div style="position:absolute; z-index=0; color: #e1e1e1; font-size: 9px; letter-spacing: 3px;">
-	<?php /*
-	$game_set = find_all_games();
-	while($game = mysqli_fetch_assoc($game_set)) {
-		for($i=0; $i < 100; $i++) {
-					echo $game["title"];
-		}
-	}
-	*/ ?>
+<h1>The Quest has Ended</h1>
 </div>
-	-->
-<!-- ><div id="search">
-	<form>
-		<input type="text" name="q" placeholder="enter your search query"/> <br />
-		<input type="submit" name="submit" value="search">
-		<br />
-		<p>or</p>
-		<br />
-		Sort by
-		<br />
-		<input type="radio" name="sortby" /> User <br />
-		<input type="radio" name="sortby" /> Game <br />
-		<input type="radio" name="sortby" /> Platform <br />
-		<input type="submit" name="submit" value="search">
-	</form>
-</div> -->
 <div id="content">
 	<div> 
 		<form action="" method="POST">
@@ -49,7 +22,7 @@
 			display_list_by_platform();
 			
 		} else {
-	// Display all lists, listing users in order of user_id
+			// Display all lists, listing users in order of user_id
 			$user_set = find_all_users();
 			while($user = mysqli_fetch_assoc($user_set)) {
 				$current_user = mysqli_fetch_assoc(find_list_by_user($user["id"]));

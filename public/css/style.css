@@ -1,8 +1,12 @@
 body {
-	margin:0;
-} 
-a {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	color: #4d4d4d;
+}
+
+a, a:visited {
 	outline:none;
+	text-decoration: none;
+	color: #4d4d4d;
 }
 a img {
 	border:0;
@@ -11,23 +15,61 @@ a img {
 img {
     border:0;
 }
-/* .border {
-	position:relative;
-	margin: 0px 0;
-	-moz-box-shadow:    3px 3px 4px 0px #a3a3a3;
-	-webkit-box-shadow: 3px 3px 4px 0px #a3a3a3;
-	box-shadow:         3px 3px 4px 0px #a3a3a3;
-	border-top: 5px solid #9a9a9a;
-	background:#e3e3e3;
-	height: 100%;
-	} */
 html { 
-  background: url(../images/dkc_bg.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+	/*background: url(../images/dkc_bg.jpg) no-repeat center center fixed; */
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
 }
+h1 {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	font-size: 2.2em;
+	font-weight: normal;
+	line-height: 34px;
+	text-decoration: none;
+	padding: 0 0 .2em 0;
+	margin: .1em 0 .1em 0;
+	color: #4d4d4d;
+}
+h2 {
+	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
+	font-size: 2.6em;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #7d7d7d;
+	padding: 0;
+}
+h3 {
+	color: #919191;
+	font-family: Nunito, "Arial Narrow Bold", sans-serif;
+	font-size: 2.2em;
+}
+p {
+	font-family: 'Averia Sans Libre';
+	text-align: justify;
+	margin: .2em 0 0 .4em;
+	width: 95%;
+	font-size: 17px;
+	line-height: 21px;
+	color: #4d4d4d;
+}
+
+.body-container {
+	overflow: hidden;
+	max-width: 80%;
+	margin: 2em auto;
+	color: #444444;
+	background-color: white;
+}
+.footer {
+	float:left;
+	margin-top: 40px;
+	padding: 2em 0 0 0;
+	width: 100%;
+}
+
 /*------------------------- Fonts ------------------------*/
 @font-face {
 	font-family: 'Conv_Muli-Italic';
@@ -43,72 +85,31 @@ html {
 	font-weight: normal;
 	font-style: normal;
 }
+
 /*------------------------- Header ------------------------*/
-.navbar {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	float: left;
-	margin: 0 auto 0 0;
+.navbar-container {
+	display: flex-box;
+	margin-left: 0.2em;
 }
-.navbar ul {
-	margin-top: 1px;
+.navbar-container ul {
 	padding-left: 0;
 	list-style:none;
 }
-.navbar ul li {
+.navbar-container ul li {
 	display: inline;
 	color: #677592;
-	padding: .5em .5em 0 .5em;
-	margin:.5em .7em 0 0;
+	padding: .2em .2em;
+	margin-right: 0.5em;
 	border: 1px solid;
+	font-style: bold;
+	color:#677592;
+	text-transform:uppercase;
+	line-height:2em;
 }
-.navbar ul li.selected a, .navbar ul li a:hover {
+.selected, .navbar ul li a:hover {
 	color:#6b6b6b;
 }
-.navbar ul li a {
-	font-style: bold;
-	font-size:26px;
-	color:#677592;
-	font-weight:normal;
-	text-transform:uppercase;
-	text-decoration:none;
-	line-height:30px;
-}
-.navbar img { max-width: 120px; display: inline; float: left;
-}
 
-/*
-.navbar form input {
-	background:url(../images/bg-input.jpg) repeat-x;
-	border-bottom:1px solid #fefefe;
-	border-top:0;
-	border-left:1px solid #e4e4e4;
-	border-right:1px solid #e4e4e4;
-	width:172px;
-	padding:6px 5px;
-	color:#fefefe;
-	margin:0;
-	text-align:center;
-	text-shadow:0 1px 0 #000000;
-	font-size:12px;
-	letter-spacing:0.010em;
-	font-family: 'Conv_Muli-Regular';
-}
-.navbar form input#submit {
-	background: none #e6e6e6;
-	width:84px;
-	border-radius:5px;
-	border:1px solid #fff;
-	padding:0;
-	height:23px;
-	color:#767676;
-	font-family:Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-	text-transform:uppercase;
-	font-size:13px;
-	margin:12px 0 0;
-	cursor:pointer;
-	text-shadow:none;
-}
-*/
 .navbar p {
 	clear:both;
 	text-align:center;
@@ -120,46 +121,27 @@ html {
 	letter-spacing:0.001em;
 }
 .header {
-	overflow:hidden;
-	padding: 0 0 .2em 0;
-}
-.header #banner img {
+	overflow: hidden;
+	display: inline-flex;
 	float: left;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 100%;
 }
-.header form {
-	float: left;
-	margin: 1px 0;
-	text-align: left;
+.header img {
+	width: 100%;
 }
 .header .login {
 	font-family: Nunito, "Arial Narrow Bold", sans-serif;
-	font-size: 12px;
-	color:#666666;
-	float:right;
-	text-decoration: none;
-	margin: .1em .2em;
-	padding: .5em 1.5em;
-}
-.header .login a {
-	font-size: 14px;
+	float: left;
+	font-size: 1.2em;
+	padding-left: 1em;
 	color:#666666;
 	text-decoration: none;
 }
-.header .login form input[type=text], .header .login form input[type=password] {
-	float: right;
-	width: 96%;
-	padding-top: 2px;
-	margin-top: 1px;
-	font-size: 16px;
-	letter-spacing: 0.10em;
 }
 .header .login form input[type=submit] {
 	float: left;
+	max-width:100%;
 	margin-top: .5em;
-	font-size: 18px;
+	font-size: 4em;
 }
 .header .login #greeting {
 	font-size: 18px;
@@ -177,72 +159,13 @@ html {
 	padding: 0 2em;
 }
 
-/*------------------------- Body ------------------------*/
-.body {
-	overflow: hidden;
-	max-width: 760px;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	margin: 30px auto auto auto;
-	color: #444444;
-	background-color: white;
-}
-.body .footer {
-	float:left;
-	margin-top: 40px;
-	padding: 40px 0 0 0;
-	width: 100%;
-}
-.body div h1 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 32px;
-	font-weight: normal;
-	line-height: 34px;
-	text-decoration: none;
-	padding: 0 0 .2em 0;
-	margin: .1em 0 .1em 0;
-	color: #4d4d4d;
-}
-.body div h2 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 26px;
-	font-weight: normal;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	padding: 0;
-}
-.body div h3 {
-	color: #919191;
-	font-family: Nunito, "Arial Narrow Bold", sans-serif;
-	font-size: 22px;
-	font-weight: normal;
-	line-height: 20px;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	margin: 1em 0 1em 0;
-	left-margin: .5em;
-}
-.body p {
-	font-family: 'Averia Sans Libre';
-	text-align: justify;
-	margin: .2em 0 0 .4em;
-	width: 95%;
-	font-size: 17px;
-	line-height: 21px;
-	color: #4d4d4d;
-}
-
 /* PAGE styles */
 .page {
 	overflow:hidden;
 	position: relative;
 	font-family: 'Averia Sans Libre';
-	padding: 0 2em;
-	margin: 0 auto 0 auto;
+	margin: 0 auto;
+	padding: 0.4em;
 }  
 .page a {
 	text-decoration: none;
@@ -253,10 +176,10 @@ html {
 	padding: .5em;
 	margin: 0;
 	float: left;
-  outline: 1px solid #ddd;
-  border-top: 1px solid #fff;
-  padding: 5px;
-  background: #f0f0f0; 
+  	outline: 1px solid #ddd;
+  	border-top: 1px solid #fff;
+  	padding: 5px;
+  	background: #f0f0f0; 
 	max-width: 30%;
 }
 .page #search input [type=text] {
@@ -268,10 +191,10 @@ html {
 	padding: 1em 2em 4em 0;
 	margin: 0;
 	float: left;
-  outline: 1px solid #ddd;
-  border-top: 1px solid #fff;
-  padding-left: 1em;
-  background: #f0f0f0; 
+  	outline: 1px solid #ddd;
+  	border-top: 1px solid #fff;
+  	padding-left: 1em;
+  	background: #f0f0f0; 
 	max-width: 70%;
 	max-height: 400px;
 }
@@ -309,10 +232,9 @@ html {
 	line-height: 14px;
 	border: 0px none;
 }
-.page ul {
-	margin: 0 .5em 0 0;
-	padding-left: 1em;
-	max-width: 200px;
+.gamelist-container {
+	max-width: 50%;
+	padding: 0 0.3rem;
 }
 .page .frame {
 	color: #555555;
@@ -320,8 +242,9 @@ html {
   border-top: 3px solid #fff;
   padding: 2px;
 }
-.page ul li {
+.list .title {
 	font-family: Nunito, "Arial Narrow Bold", sans-serif;
+	font-size: 1em;
 	list-style: none;
 	display: block;
 	border: 1px solid #7d7d7d;
@@ -330,11 +253,23 @@ html {
 	margin: .3em 0;
 	background: white;
 }
-.page ul li img {
-	float: left;
-	padding-right: 2px;
+
+.list ul {
+	padding: 0;
 }
-/* USED IN TAGS FORMS */	
+.follow-button {
+	float: left;
+	padding-right: 0.3em;
+}
+.dropdown {
+	display: none;
+}
+li:hover .dropdown {
+	width: 95%;
+	font-size: 12px;
+	display: block;
+	padding: .2em .4em;
+	margin: 0;
 }
 .page label {
 	float: left;
@@ -343,16 +278,7 @@ html {
 	float: left;
 	width: 20px;
 }
-.page .drop_content {
-	display: none;
-}
-.page ul li:hover .drop_content {
-	width: 95%;
-	font-size: 12px;
-	display: block;
-	padding: .2em .4em;
-	margin: 0;
-}
+
 .page .add_challenge {
 	background: #f0f0f0;
 	display: none;

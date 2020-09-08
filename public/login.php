@@ -1,26 +1,26 @@
-<?php require_once("../includes/session.php"); ?>
-<?php require_once("../includes/db_connection.php"); ?>
+<?php require_once("../includes/Session.php"); ?>
+<?php require_once("../includes/Database.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
-<?php require_once("../includes/validation_functions.php"); ?>
+<?php require_once("../includes/Authenticator.php"); ?>
 
 <?php
-$username = "";
 if (isset($_POST["submit"])) {
+	$db = new Database();
+	$auth = new Authenticator($db->getConnection());
+
 	$username = strtoupper($_POST["username"]);
 	$password = $_POST["password"];
-	$found_user = attempt_login($username, $password);
+	$foundUser = $auth->attemptLogin($username, $password);
+
+	//Validations
 	
-	//validations
-	// $required_fields = array("username", "password");
-	// validate_presences($required_fields);
-	
-	if (empty($errors)) {
+	if (empty($auth->errors)) {
 		
-		if($found_user) {
+		if($foundUser) {
 			// Success
-			$_SESSION["user_id"] = $found_user["id"];
-			$_SESSION["username"] = $found_user["username"];
-			$_SESSION["points"] = $found_user["points"];
+			$_SESSION["user_id"] = $foundUser["id"];
+			$_SESSION["username"] = $foundUser["username"];
+			$_SESSION["points"] = $foundUser["points"];
 			redirect_to("manage_user.php");
 		} else {
 			// Failure
@@ -34,9 +34,3 @@ if (isset($_POST["submit"])) {
 	// Likely a GET request
 }
 ?>
-
-	<?php include("../includes/footer.php"); ?>
-	
-</div>
-</body>
-</html>
