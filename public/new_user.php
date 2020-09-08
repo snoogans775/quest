@@ -5,7 +5,7 @@
 <?php $layout_context = "public"; ?>
 <?php find_selected_page(); ?>
 
-<?php /*
+<?php
 if (isset($_POST["submit"])) {
 	//validations
 	$required_fields = array("username", "password");
@@ -55,17 +55,16 @@ if (isset($_POST["submit"])) {
 	}
 }
 
-*/?>
+?>
 <?php include("../includes/header.php"); ?>
 <div class="page">
 	<?php 
 		if (!isset($_SESSION["username"])) { ?>
-			<h1>Sorry, The Quest is in Winter hibernation. Check the <a href="/forum.php">forums if you have any questions. Thanks!</h1>
+			<h1>Create a new user account</h1>
 			<div>
 				<?php echo form_errors($errors); ?>
 				<?php echo $_SESSION["message"]; $_SESSION["message"] = null; ?>
 			</div>
-			<!-- DISCONTINuED/ CHECK LINE 98 for CLOSING COMMENT
 			<form action="new_user.php" method="POST">
 				<table>
 					<tr>
@@ -87,7 +86,6 @@ if (isset($_POST["submit"])) {
 				
 				<input type="submit" name="submit" value="Register" />
 			</form>
-				-->
 		<?php } else {
 			echo "<p>Please log out before creating a new user. And please don't make more than one user account. It is poor form. Very poor.</p>";
 		} ?>
