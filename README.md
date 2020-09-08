@@ -1,9 +1,3 @@
-#The Quest
-A "game club" platform for the Reno Video Game Symphony
-=======
-PHP Indexing tool for Reno Video Game Symphony
-previously hosted at http://www.rvgsymphony.com/quest
-=======
 # The Quest
 A "game club" platform for the Reno Video Game Symphony
 
