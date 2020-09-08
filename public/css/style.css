@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-body {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	color: #4d4d4d;
-}
-
-a, a:visited {
-=======
 a {
->>>>>>> heroku-dev
 	outline:none;
 	text-decoration: none;
 	color: #4d4d4d;
@@ -20,59 +11,6 @@ img {
     border:0;
 }
 html { 
-<<<<<<< HEAD
-	/*background: url(../images/dkc_bg.jpg) no-repeat center center fixed; */
-  	-webkit-background-size: cover;
-  	-moz-background-size: cover;
-  	-o-background-size: cover;
-  	background-size: cover;
-}
-h1 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 2.2em;
-	font-weight: normal;
-	line-height: 34px;
-	text-decoration: none;
-	padding: 0 0 .2em 0;
-	margin: .1em 0 .1em 0;
-	color: #4d4d4d;
-}
-h2 {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	font-size: 2.6em;
-	font-weight: normal;
-	text-decoration: none;
-	text-transform: uppercase;
-	color: #7d7d7d;
-	padding: 0;
-}
-h3 {
-	color: #919191;
-	font-family: Nunito, "Arial Narrow Bold", sans-serif;
-	font-size: 2.2em;
-}
-p {
-	font-family: 'Averia Sans Libre';
-	text-align: justify;
-	margin: .2em 0 0 .4em;
-	width: 95%;
-	font-size: 17px;
-	line-height: 21px;
-	color: #4d4d4d;
-}
-
-.body-container {
-	overflow: hidden;
-	max-width: 80%;
-	margin: 2em auto;
-	color: #444444;
-	background-color: white;
-}
-.footer {
-	float:left;
-	margin-top: 40px;
-	padding: 2em 0 0 0;
-=======
   background: url(../images/rygar_bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -108,7 +46,6 @@ h3 {
 	text-transform: uppercase;
 	color: #7d7d7d;
 	margin: 1em 0 1em 0;
-	left-margin: .5em;
 }
 p {
 	font-family: 'Averia Sans Libre';
@@ -131,7 +68,6 @@ p {
 	float:left;
 	margin-top: 40px;
 	padding: 2em 0;
->>>>>>> heroku-dev
 	width: 100%;
 }
 
@@ -156,17 +92,6 @@ p {
 	display: flex-box;
 	margin-left: 0.2em;
 }
-<<<<<<< HEAD
-.navbar-container ul {
-	padding-left: 0;
-	list-style:none;
-}
-.navbar-container ul li {
-	display: inline;
-	color: #677592;
-	padding: .2em .2em;
-	margin-right: 0.5em;
-=======
 .navbar ul {
 	margin-top: 0.2em;
 	padding-left: 0;
@@ -177,13 +102,9 @@ p {
 	color: #677592;
 	padding: .2em .2em 0 .2em;
 	margin:.5em .2em 0 0;
->>>>>>> heroku-dev
 	border: 1px solid;
 	font-style: bold;
-<<<<<<< HEAD
-=======
 	font-size: 1rem;
->>>>>>> heroku-dev
 	color:#677592;
 	text-transform:uppercase;
 	line-height:2em;
@@ -218,7 +139,6 @@ p {
 	color:#666666;
 	text-decoration: none;
 }
-}
 .header .login form input[type=submit] {
 	float: left;
 	max-width:100%;
@@ -246,12 +166,7 @@ p {
 	overflow:hidden;
 	position: relative;
 	font-family: 'Averia Sans Libre';
-<<<<<<< HEAD
-	margin: 0 auto;
-	padding: 0.4em;
-=======
 	padding: 0 0.4em;
->>>>>>> heroku-dev
 }  
 .page a {
 	text-decoration: none;
@@ -277,18 +192,10 @@ p {
 	padding: 0.2em;
 	margin: 0;
 	float: left;
-<<<<<<< HEAD
-  	outline: 1px solid #ddd;
-  	border-top: 1px solid #fff;
-  	padding-left: 1em;
-  	background: #f0f0f0; 
-	max-width: 70%;
-=======
   outline: 1px solid #ddd;
   border-top: 1px solid #fff;
   background: #f0f0f0; 
 	max-width: 50%;
->>>>>>> heroku-dev
 	max-height: 400px;
 }
 .page #menu {
@@ -325,16 +232,10 @@ p {
 	line-height: 14px;
 	border: 0px none;
 }
-<<<<<<< HEAD
-.gamelist-container {
-	max-width: 50%;
-	padding: 0 0.3rem;
-=======
 .page ul {
 	margin: 0 .5em 0 0;
 	padding-left: 1em;
 	max-width: 90%;
->>>>>>> heroku-dev
 }
 .page .frame {
 	color: #555555;
