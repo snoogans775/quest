@@ -1,8 +1,8 @@
-<?php ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); ?>
 <?php require_once("../includes/session.php"); ?>
 <?php require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
 <?php require_once("../includes/validation_functions.php"); ?>
+<?php ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); ?>
 <?php $layout_context = "public"; ?>
 <?php find_selected_page(); ?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
 				<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
 </head>
 <body>
-	<div class="body">
+	<div id="body-container">
 		<div class="header">
 			<div id="banner">
 				<a href="index.php"><img src="../public/images/quest_logo.png"></img></a>

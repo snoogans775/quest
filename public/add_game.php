@@ -1,14 +1,14 @@
 <?php include("../includes/mng_usr_header.php"); ?>
-<?php include("../includes/funcitons.php"); ?>
-
 
 <?php
 	if (isset($_POST["submit"])) {
 		$title = $_POST["title"];
 		$platform = $_POST["platform"];
 		$challenge = $_POST["challenge"];
+		
+		print_r($_SESSION);
 	
-		add_game_to_list()
+		add_game_to_list($title, $platform. $challenge);
 	}	// This is probably a GET request 
 ?>
 <!-- BEGIN PAGE CONTENT -->

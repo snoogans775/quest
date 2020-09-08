@@ -2,10 +2,8 @@
 	
 <?php
 if (isset($_POST["submit"])) {
-	//validations
-	$required_fields = array("comments");
-	validate_presences($required_fields);
-
+	
+	
 	if (empty($errors)) {
 		global $connection;
 		$comments = mysql_prep($_POST["comments"]);
@@ -151,10 +149,11 @@ if (isset($_POST["submit"])) {
 	<!-- END OF <div id="menu"> -->
 	</div>
 	<div id="sidebar">
-		<h2>You beat a game? Yes!( ⁼̴̤̆ ළ̉ ⁼̴̤̆)و ̑̑</h2>
+		<h2>You beat a game?</h2> 
+		<p>Yes!( ⁼̴̤̆ ළ̉ ⁼̴̤̆)و ̑̑</p>
 		<p>A credits screen, a 'fin', or a kill screen is a good sign. If a user has specified a special challenge for the game, you should check, and choose the challenge you would like to confirm, because...</p>
 		<h2>YOU CAN ONLY CONFIRM A GAME ONCE!</h2>
-		<p>This is kind of a bummer. I know it is. I wish we could think up a way to get all kinds of crazy points for doing bizarre hijinx in these games. If you have an idea, suggest it in the <a href="../forum/index.php">FORUMS</a>. </p>
+		<p>This is kind of a bummer. I know it is. I wish we could think up a way to get all kinds of crazy points for doing bizarre hijinx in these games. </p>
 		<p>The silver lining on this is that if you confirm a challenge, you get a 100pt bonus. It's like a high-five, imagine the other Quester waiting with their hand in the air for months. MONTHS.</p>
 	</div>
 	<br />

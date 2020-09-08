@@ -42,12 +42,11 @@ if (isset($_POST["submit"])) {
 		if ($result && mysqli_affected_rows($connection) >= 0) {
 			//Success
 			$_SESSION["message"] = "Account Created.";
-			redirect_to("new_forum_user.php?user=". $_POST["username"]. "&pass=". $_POST["password"]);
 		} else {
 			//Failure
 			$_SESSION["message"] = "Registration failed.";
-			redirect_to("new_user.php");
 		}
+		redirect_to("new_user.php");
 		
 	} else {
 	// This is probably a GET request
