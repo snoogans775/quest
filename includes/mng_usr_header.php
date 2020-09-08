@@ -2,7 +2,6 @@
 <?php require_once("../includes/db_connection.php"); ?>
 <?php require_once("../includes/functions.php"); ?>
 <?php require_once("../includes/validation_functions.php"); ?>
-<?php	ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); ?>
 <?php $layout_context = "public"; ?>
 <?php $username = $_SESSION["username"]; ?>
 <?php confirm_logged_in(); ?>
@@ -16,6 +15,7 @@
 	<link rel="stylesheet" type="text/css"
 	      href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer|Nunito|Averia+Sans+Libre">
 				<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+				<meta name="viewport" content="width=device-width, initial-scale=1"> 
 </head>
 <body>
 	<div id="body-container">
