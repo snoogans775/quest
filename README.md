@@ -1,15 +1,11 @@
-<<<<<<< HEAD
 #The Quest
-<<<<<<< HEAD
 A "game club" platform for the Reno Video Game Symphony
 =======
 PHP Indexing tool for Reno Video Game Symphony
->>>>>>> 63e108db31f662d815bc8f93faaf0b8aeccd358f
 previously hosted at http://www.rvgsymphony.com/quest
 =======
 # The Quest
 A "game club" platform for the Reno Video Game Symphony
->>>>>>> a9cc7a013c6557807e6a607a6a6b5fd22a92632b
 
 A user-submission interface to inspire critical thinking about interactive media. Users create lists. The lists serve to recommend titles for others. An personalized email newsletter keeps users up to date and invites users to participate in events.
 ## How it works
