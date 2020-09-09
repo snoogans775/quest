@@ -245,7 +245,7 @@
 									</span>';
 			$output .= '<br />
 									<span id="mini_menu">
-										<a href="manage_user.php?id=<?php echo $_SESSION["user_id"]; ?>">Your Quest</a>
+										<a href="manage_user.php">Your Quest</a>
 									</span>';
 		}
 		return $output;
