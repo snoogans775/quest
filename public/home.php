@@ -5,6 +5,7 @@
 <h1>The Quest has Risen!</h1>
 >>>>>>> heroku-dev
 <div id="content">
+<?php print_r(getenv()); ?>
 	<div> 
 		<form action="" method="POST">
 			<select name="platform_sort">

@@ -220,7 +220,8 @@
 		}
 	}
 	
-	function login_form($current_user) {
+
+	function login_form() {
 		$output = '';
 
 		if (!isset($_SESSION["username"])) { 
@@ -240,13 +241,10 @@
 			$output .= '</span>';
 			$output .= '<span id="logout">
 										<a href="logout.php">Logout</a>
-									</span>
-									<br />
-									Points:';
-			$output .= $current_user["points"];
+									</span>';
 			$output .= '<br />
 									<span id="mini_menu">
-										<a href="manage_user.php?id=<?php echo $_SESSION["user_id"]; ?>">Your Quest</a>
+										<a href="manage_user.php">Your Quest</a>
 									</span>';
 		}
 		return $output;
@@ -376,10 +374,7 @@
 		$output .= "</ul>";
 		return $output;
 	}
-	
-<<<<<<< HEAD
-	function find_list_by_user($connection, $user_id) {
-=======
+
 	function display_completed_games($user_id) {
 		$completion_set = find_completed_games($_SESSION["user_id"]);
 		$output = '';
@@ -398,7 +393,6 @@
 	}
 	
 	function find_list_by_user($user_id) {
->>>>>>> heroku-dev
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
 		// wasn't. I really do.
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
@@ -545,7 +539,7 @@
 	
 	function check_confirmation($safe_user_id, $safe_source_user_id, $safe_game_id) {
 		global $connection;
-		$query = "SELECT * FROM completion_commits ";
+		$query  = "SELECT * FROM completion_commits ";
 		$query .= "WHERE user_id = {$safe_user_id} " ;
 		$query .= "AND game_id = {$safe_game_id} ";
 		$query .= "AND source_user_id = {$safe_source_user_id} ";
@@ -562,13 +556,8 @@
 	}
 	
 	//LIST MODIFY FUNCTIONS
-	
-<<<<<<< HEAD
-	function add_game_to_list($connection, $title, $platform, $challenge = "") {
-=======
 	function add_game_to_list($title, $platform, $challenge = "") {
 		global $connection;
->>>>>>> heroku-dev
 		$required_fields = array("title", "platform");
 		validate_presences($required_fields);
 	
@@ -577,14 +566,45 @@
 	
 		// Inserts game data into user's list, returns existing id if game already exists
 		if (empty($errors)) {
-			$new_game = find_game_by_title($title);
-			$title = mysql_prep($title); // Use the user-submitted title
-			$platform = mysql_prep($platform); // Use the user-submitted platform
-			$challenge = mysql_prep($challenge);
-		
+			// Adds game to db if not already in db
+			insert_game($title, $platform);
+
+			$game = find_game_by_title($title);
+			
+			//Add game to user list
 			//Users_games table specific variables
 			$user_id = mysql_prep($_SESSION["user_id"]);
-			//$game_id = mysql_prep($new_game["game_id"]);
+			$game_id = mysql_prep($game["game_id"]);
+			$challenge = mysql_prep($challenge);
+
+			$query  = "INSERT IGNORE INTO users_games ("; 
+			$query .= " user_id, game_id, challenge";
+			$query .= ") VALUES (";
+			$query .= " {$user_id}, {$game_id}, '{$challenge}' ";
+			$query .= ")";
+			$result = mysqli_query($connection, $query); 
+			//$result will not be a typical variable. It will be a resource.
+
+			if ($result && mysqli_affected_rows($connection) >= 0) {
+				//Successs
+				$_SESSION["message"] .= "<br />Your list has been updated.";
+			} else {
+				//Failure
+				$_SESSION["message"] .= "Game Not Entered. Please contact the webmaster for help";
+		  }
+			//redirect_to("add_game.php"); 
+		}
+		
+	}
+
+	function insert_game($title, $platform) {
+			global $connection;
+
+			$game = find_game_by_title($title);
+			if($game != null) { return; }
+
+			$title = mysql_prep($title); // Use the user-submitted title
+			$platform = mysql_prep($platform); // Use the user-submitted platform
 			
 			// Makes sure the game has not been entered already.
 			$query  = "INSERT INTO games ("; 
@@ -602,29 +622,7 @@
 				//Failure
 				$_SESSION["message1"] = "Game already in database. ";
 			}
-			
-			//Add game to user's list
-
-			$query  = "INSERT IGNORE INTO users_games ("; 
-			$query .= " user_id, game_id, challenge";
-			$query .= ") VALUES (";
-			$query .= " {$user_id}, 100, '{$challenge}' ";
-			$query .= ")";
-			$result = mysqli_query($connection, $query); 
-			//$result will not be a typical variable. It will be a resource.
-
-			if ($result && mysqli_affected_rows($connection) >= 0) {
-				//Successs
-				$_SESSION["message"] .= "<br />Your list has been updated.";
-			} else {
-				//Failure
-				$_SESSION["message"] .= "Game Not Entered. Please contact the webmaster for help";
-		  }
-			//redirect_to("add_game.php"); 
-		}
-		
-	}
-
+=======
 	function leaderBoard($connection) {
 		$query = "SELECT * ";
 		$query .= "FROM users ";

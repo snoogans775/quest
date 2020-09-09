@@ -7,7 +7,7 @@
 		$challenge = $_POST["challenge"];
 	
 		add_game_to_list($title, $platform. $challenge);
-	}	// This is probably a GET request 
+	}
 ?>
 <!-- BEGIN PAGE CONTENT -->
 <a href="manage_user.php">Your Quest ></a>
