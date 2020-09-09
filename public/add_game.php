@@ -5,11 +5,9 @@
 		$title = $_POST["title"];
 		$platform = $_POST["platform"];
 		$challenge = $_POST["challenge"];
-		
-		print_r($_SESSION);
 	
 		add_game_to_list($title, $platform. $challenge);
-	}	// This is probably a GET request 
+	}
 ?>
 <!-- BEGIN PAGE CONTENT -->
 <a href="manage_user.php">Your Quest ></a>

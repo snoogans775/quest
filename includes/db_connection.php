@@ -1,5 +1,5 @@
 <?php
-define("DB_SERVER", "quest.db");
+define("DB_SERVER", "localhost");
 define("DB_USER", "snoogans775");
 define("DB_PASS", "+Pe5Qr6%unC-i");
 define("DB_NAME", "quest");

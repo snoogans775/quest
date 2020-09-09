@@ -569,14 +569,45 @@
 	
 		// Inserts game data into user's list, returns existing id if game already exists
 		if (empty($errors)) {
-			$new_game = find_game_by_title($title);
-			$title = mysql_prep($title); // Use the user-submitted title
-			$platform = mysql_prep($platform); // Use the user-submitted platform
-			$challenge = mysql_prep($challenge);
-		
+			// Adds game to db if not already in db
+			insert_game($title, $platform);
+
+			$game = find_game_by_title($title);
+			
+			//Add game to user list
 			//Users_games table specific variables
 			$user_id = mysql_prep($_SESSION["user_id"]);
-			//$game_id = mysql_prep($new_game["game_id"]);
+			$game_id = mysql_prep($game["game_id"]);
+			$challenge = mysql_prep($challenge);
+
+			$query  = "INSERT IGNORE INTO users_games ("; 
+			$query .= " user_id, game_id, challenge";
+			$query .= ") VALUES (";
+			$query .= " {$user_id}, {$game_id}, '{$challenge}' ";
+			$query .= ")";
+			$result = mysqli_query($connection, $query); 
+			//$result will not be a typical variable. It will be a resource.
+
+			if ($result && mysqli_affected_rows($connection) >= 0) {
+				//Successs
+				$_SESSION["message"] .= "<br />Your list has been updated.";
+			} else {
+				//Failure
+				$_SESSION["message"] .= "Game Not Entered. Please contact the webmaster for help";
+		  }
+			//redirect_to("add_game.php"); 
+		}
+		
+	}
+
+	function insert_game($title, $platform) {
+			global $connection;
+
+			$game = find_game_by_title($title);
+			if($game != null) { return; }
+
+			$title = mysql_prep($title); // Use the user-submitted title
+			$platform = mysql_prep($platform); // Use the user-submitted platform
 			
 			// Makes sure the game has not been entered already.
 			$query  = "INSERT INTO games ("; 
@@ -594,27 +625,6 @@
 				//Failure
 				$_SESSION["message1"] = "Game already in database. ";
 			}
-			
-			//Add game to user's list
-
-			$query  = "INSERT IGNORE INTO users_games ("; 
-			$query .= " user_id, game_id, challenge";
-			$query .= ") VALUES (";
-			$query .= " {$user_id}, 100, '{$challenge}' ";
-			$query .= ")";
-			$result = mysqli_query($connection, $query); 
-			//$result will not be a typical variable. It will be a resource.
-
-			if ($result && mysqli_affected_rows($connection) >= 0) {
-				//Successs
-				$_SESSION["message"] .= "<br />Your list has been updated.";
-			} else {
-				//Failure
-				$_SESSION["message"] .= "Game Not Entered. Please contact the webmaster for help";
-		  }
-			//redirect_to("add_game.php"); 
-		}
-		
 	}
 	
 	

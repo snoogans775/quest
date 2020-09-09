@@ -235,13 +235,13 @@ p {
 	max-width: 80%;
 }  
 .page #sidebar {
-	float:right;
+	float:left;
 	padding: 0 0 0 1em;
 	max-width: 40%;
 	text-align: right;
 }
 .page #sidebar ul {
-	float:right;
+	float:left;
 	text-align: right;
 }
 .page #blog {
@@ -284,7 +284,6 @@ p {
 	padding-right: 2px;
 }
 /* USED IN TAGS FORMS */	
-}
 .page label {
 	float: left;
 }

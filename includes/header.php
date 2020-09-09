@@ -22,33 +22,7 @@
 				<a href="index.php"><img src="../public/images/quest_logo.png"></img></a>
 			</div>
 			<div class="login">
-			<?php 
-			if (!isset($_SESSION["username"])) { ?>	
-				<form action="login.php" method="POST">
-					<input type="text" placeholder="username" name="username" /><br />
-					<input type="password" placeholder="password" name="password" /><br/>
-					<span>
-						<input type="submit" name="submit" value="login" />
-				</form>
-						<a href="new_user.php">&nbsp &nbsp New To The Quest?</a>
-					</span>
-			<?php } else { ?> 
-				<span id="greeting">
-					Hello, <?php echo $_SESSION["username"]; ?> 
-				</span>
-				<span id="logout">
-					<a href="logout.php">Logout</a>
-				</span>
- 				<br />
-				Points: 
-				<?php 
-					$current_user = find_user_by_id($_SESSION["user_id"]);
-					echo $current_user["points"]; ?> 
-				<br />
-				<span id="mini_menu">
-					<a href="manage_user.php?id=<?php echo $_SESSION["user_id"]; ?>">Your Quest</a>
-				</span>
-			<?php } ?>
+			<?php echo login_form(); ?>
 			</div>
 			<div class="navbar">
 					<?php echo navigation($current_subject, $current_page); ?>
