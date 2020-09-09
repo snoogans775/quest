@@ -377,9 +377,6 @@
 		return $output;
 	}
 	
-<<<<<<< HEAD
-	function find_list_by_user($connection, $user_id) {
-=======
 	function display_completed_games($user_id) {
 		$completion_set = find_completed_games($_SESSION["user_id"]);
 		$output = '';
@@ -398,9 +395,9 @@
 	}
 	
 	function find_list_by_user($user_id) {
->>>>>>> heroku-dev
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
 		// wasn't. I really do.
+		global $connection;
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
 		
 		$query  = "SELECT DISTINCT games.* ";
