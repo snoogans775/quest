@@ -282,6 +282,7 @@
 	}
 	
 	function login_form() {
+		$output = '';
 
 		if (!isset($_SESSION["username"])) { 
 			//FIXME: SPAN IS ACROSS ANOTHER TAG
@@ -300,16 +301,13 @@
 			$output .= '</span>';
 			$output .= '<span id="logout">
 										<a href="logout.php">Logout</a>
-									</span>
-									<br />
-									Points:';
-			$output .= $current_user["points"];
+									</span>';
 			$output .= '<br />
 									<span id="mini_menu">
 										<a href="manage_user.php?id=<?php echo $_SESSION["user_id"]; ?>">Your Quest</a>
 									</span>';
 		}
-		return $ouput;
+		return $output;
 	}
 
 	//QUEST DATABASE FUNCTIONS //
