@@ -1,10 +1,21 @@
-<?php require_once("../includes/session.php"); ?>
-<?php include("../includes/db_connection.php"); ?>
-<?php require_once("../includes/functions.php"); ?>
-<?php require_once("../includes/validation_functions.php"); ?>
-<?php $layout_context = "public"; ?>
-<?php find_selected_page(); ?>
+<?php require __DIR__ . "/../vendor/autoload.php"; ?>
+<?php ini_set('error_reporting', E_ALL); ini_set('display_errors', 1); ?>
+<html>
+<head>
+	<meta charset="utf-8"></meta>
+	<title>The Quest</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" type="text/css"
+	      href="https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer|Nunito|Averia+Sans+Libre" />
+	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<?php 
 
+<<<<<<< HEAD
+$db = new Database();
+$db->setDefaultConnection();
+=======
 <?php
 if (isset($_POST["submit"])) {
 	//validations
@@ -13,23 +24,33 @@ if (isset($_POST["submit"])) {
 	
 	$fields_with_max_lengths = array("username" => 30);
 	validate_max_lengths($fields_with_max_lengths);
+>>>>>>> heroku-dev
 
-	validate_email("email");
+if( isset($_SESSION)) { print_r( $_SESSION ); }
 
-	match_passwords("password", "password_confirm");
-	
-	//EMERGENCY VALIDATION QUESTION, FIX WITH A CAPTCHA OR A fUNCTION
-	
-	$answer = strtolower($_POST["validate"]);
-	if ($answer !== "doki") {
-		$errors[] = "Please answer the security qustion correctly";
-	}
-	
-	if (empty($errors)) {
-		$username = mysql_prep($_POST["username"]);
-		$email = mysql_prep($_POST["email"]);
-		$hashed_password = password_encrypt($_POST["password"]);
+if (isset($_POST["submit"])) { $db->addUser($_POST); }
 
+<<<<<<< HEAD
+?>
+	<form action="new_user.php" method="POST">
+		<table>
+			<tr>
+		<td>Username: </td><td><input type="text" name="username" placeholder="ex. vidjyagamesBilly" /></td>
+			</tr>
+			<tr>
+		<td>Email: </td><td><input type="text" name="email" placeholder="ex. praise@vidjya.games"/></td>
+			</tr>
+			<tr>
+		<td>Password: </td><td><input type="password" name="password" placeholder="" /></td>
+			</tr>
+			<tr>
+		<td>Confirm Password: </td><td><input type="password" name="password_confirm" placeholder="" /></td>
+			</tr>
+		</table>
+		
+		<input type="submit" name="submit" value="Register" />
+	</form>
+=======
 		//performs database query
 		$query  = "INSERT INTO users ("; 
 		$query .= " username, hashed_password, points, email, date_joined";
@@ -91,5 +112,6 @@ if (isset($_POST["submit"])) {
 	
 </div>
 <?php include("../includes/footer.php"); ?>
+>>>>>>> heroku-dev
 </body>
 </html>

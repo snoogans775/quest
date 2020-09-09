@@ -8,8 +8,7 @@
 		exit;
 	}
 	
-	function mysql_prep($string) {
-		global $connection;
+	function mysql_prep($connection, $string) {
 		$escaped_string = mysqli_real_escape_string($connection, $string);
 		return $escaped_string;
 	}
@@ -33,6 +32,7 @@
 	function form_errors($errors=array()) {
 		$output = "";
 		if (!empty($errors)) {
+			$output .= "<font color=\"red\">";
 		  $output .= "<div class=\"error\">";
 		  $output .= "<ul>";
 		  foreach ($errors as $key => $error) {
@@ -42,14 +42,14 @@
 		  }
 		  $output .= "</ul>";
 		  $output .= "</div>";
+			$output .= "</font>";
 		}
 		return $output;
 	}
 	
 	// NAVIGATION FUNCTIONS //
 	
-	function find_all_subjects($public=true) {
-		global $connection;
+	function find_all_subjects($connection) {
 		$query = "SELECT * ";
 		$query .= "FROM subjects ";
 		// if ($public){
@@ -147,11 +147,9 @@
 	
 	// USER FUNCTIONS //
 	
-	function find_all_users() {
-		global $connection;
+	function find_all_users($connection) {
 		$query = "SELECT * ";
 		$query .= "FROM users ";
-		// $query .= "ORDER BY id ASC";
 		$user_set = mysqli_query($connection, $query);
 		confirm_query($user_set);	
 		return $user_set;
@@ -195,12 +193,12 @@
 	// - the current subject array or null
 	// - the current page array or null
 	
-	function navigation($subject_array, $page_array) {
+	function navigation($connection, $subject_array) {
 		global $layout_context;
 		$output = "";
 		if ($layout_context == "public") {
 			$output .= "<ul class=\"navbar\">";
-			$subject_set = find_all_subjects();
+			$subject_set = find_all_subjects($connection);
 			while($subject = mysqli_fetch_assoc($subject_set)) {
 				$output .= "<li";
 				// $subject_array is the first argument for this function, it will be the current subject
@@ -222,6 +220,7 @@
 		}
 	}
 	
+
 	function login_form() {
 		$output = '';
 
@@ -297,10 +296,9 @@
 		return $game_set;
 	}
 	
-	function find_list_item($user_id, $game_id, $table="users_games") {
+	function find_list_item($connection, $user_id, $game_id, $table="users_games") {
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
 		// wasn't. I really do. Changing it simply does not jibe with these functions for some reason.
-		global $connection;
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
 		$safe_game_id = mysqli_real_escape_string($connection, $game_id);
 		
@@ -376,7 +374,7 @@
 		$output .= "</ul>";
 		return $output;
 	}
-	
+
 	function display_completed_games($user_id) {
 		$completion_set = find_completed_games($_SESSION["user_id"]);
 		$output = '';
@@ -396,8 +394,7 @@
 	
 	function find_list_by_user($user_id) {
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
-		// wasn't. I really do. Oh have I tried to fix this.
-		global $connection;
+		// wasn't. I really do.
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
 		
 		$query  = "SELECT DISTINCT games.* ";
@@ -409,7 +406,8 @@
 		$query .= "WHERE id = {$safe_user_id} " ;
 		$game_set = mysqli_query($connection, $query);
 		confirm_query($game_set);
-			return $game_set;
+		
+		return $game_set;
 	}
 	
 	function find_list_item_by_game($game_id, $table="users_games") {
@@ -461,8 +459,8 @@
 			} // End of if isset($_POST["submit"])
 	}
 	
-	function display_list($user_id, $public = true) {
-		$game_set = find_list_by_user($user_id);
+	function display_list($connection, $user_id, $public = true) {
+		$game_set = find_list_by_user($connection, $user_id);
 
 			$output = "<ul>";
 			while($game = mysqli_fetch_assoc($game_set)) {
@@ -482,7 +480,7 @@
 				$output .= "<div class=\"drop_content\">"; 
 				$output .= "Platform: " .htmlentities($game["platform"]);  //Platform for game, not unique to user
 				// Returns list item for this user only
-				$list_item = mysqli_fetch_assoc(find_list_item($user_id, $game["game_id"]));
+				$list_item = mysqli_fetch_assoc(find_list_item($connection, $user_id, $game["game_id"]));
 				if ($list_item["challenge"]) {
 				$output .= "<br />";
 				$output .= "Challenge: " .htmlentities($list_item["challenge"]);
@@ -558,7 +556,6 @@
 	}
 	
 	//LIST MODIFY FUNCTIONS
-	
 	function add_game_to_list($title, $platform, $challenge = "") {
 		global $connection;
 		$required_fields = array("title", "platform");
@@ -625,6 +622,22 @@
 				//Failure
 				$_SESSION["message1"] = "Game already in database. ";
 			}
+=======
+	function leaderBoard($connection) {
+		$query = "SELECT * ";
+		$query .= "FROM users ";
+		$query .= "ORDER BY points DESC ";
+		// $query .= "LIMIT 5";
+		$user_set = mysqli_query($connection, $query);
+		confirm_query($user_set);
+		if (mysqli_affected_rows($connection) >= 1) {
+			echo '<br />';
+			while($user = mysqli_fetch_assoc($user_set)) {
+				if ($user['points'] > 400) {
+					echo $user['username']. '  :  '. $user['points']. '<br />';					
+				}
+			}	
+		}
 	}
 	
 	
@@ -707,6 +720,7 @@
 		    $_SESSION["message"] .= "Message has been sent. ";
 		}
 	}
+
 	
 	//PASSWORD AND LOGIN FUNCTIONS //
 	

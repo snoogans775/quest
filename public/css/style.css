@@ -1,5 +1,7 @@
 a {
 	outline:none;
+	text-decoration: none;
+	color: #4d4d4d;
 }
 a img {
 	border:0;
@@ -44,7 +46,6 @@ h3 {
 	text-transform: uppercase;
 	color: #7d7d7d;
 	margin: 1em 0 1em 0;
-	left-margin: .5em;
 }
 p {
 	font-family: 'Averia Sans Libre';
@@ -87,10 +88,9 @@ p {
 }
 
 /*------------------------- Header ------------------------*/
-.navbar {
-	font-family: Averia Sans Libre, "Arial Narrow Bold", sans-serif;
-	float: left;
-	margin: 0 auto 0 0;
+.navbar-container {
+	display: flex-box;
+	margin-left: 0.2em;
 }
 .navbar ul {
 	margin-top: 0.2em;
@@ -103,20 +103,14 @@ p {
 	padding: .2em .2em 0 .2em;
 	margin:.5em .2em 0 0;
 	border: 1px solid;
-}
-.navbar ul li.selected a, .navbar ul li a:hover {
-	color:#6b6b6b;
-}
-.navbar ul li a {
 	font-style: bold;
 	font-size: 1rem;
 	color:#677592;
-	font-weight:normal;
 	text-transform:uppercase;
-	text-decoration:none;
-	line-height:30px;
+	line-height:2em;
 }
-.navbar img { max-width: 120px; display: inline; float: left;
+.selected, .navbar ul li a:hover {
+	color:#6b6b6b;
 }
 
 .navbar p {
@@ -130,46 +124,26 @@ p {
 	letter-spacing:0.001em;
 }
 .header {
-	overflow:hidden;
-	padding: 0 0 .2em 0;
-}
-.header #banner img {
+	overflow: hidden;
+	display: inline-flex;
 	float: left;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 100%;
 }
-.header form {
-	float: left;
-	margin: 1px 0;
-	text-align: left;
+.header img {
+	width: 100%;
 }
 .header .login {
 	font-family: Nunito, "Arial Narrow Bold", sans-serif;
-	font-size: 12px;
-	color:#666666;
-	float:right;
-	text-decoration: none;
-	margin: .1em .2em;
-	padding: .5em 1.5em;
-}
-.header .login a {
-	font-size: 14px;
+	float: left;
+	font-size: 1.2em;
+	padding-left: 1em;
 	color:#666666;
 	text-decoration: none;
-}
-.header .login form input[type=text], .header .login form input[type=password] {
-	float: right;
-	width: 96%;
-	padding-top: 2px;
-	margin-top: 1px;
-	font-size: 16px;
-	letter-spacing: 0.10em;
 }
 .header .login form input[type=submit] {
 	float: left;
+	max-width:100%;
 	margin-top: .5em;
-	font-size: 18px;
+	font-size: 4em;
 }
 .header .login #greeting {
 	font-size: 18px;
@@ -203,10 +177,10 @@ p {
 	padding: .5em;
 	margin: 0;
 	float: left;
-  outline: 1px solid #ddd;
-  border-top: 1px solid #fff;
-  padding: 5px;
-  background: #f0f0f0; 
+  	outline: 1px solid #ddd;
+  	border-top: 1px solid #fff;
+  	padding: 5px;
+  	background: #f0f0f0; 
 	max-width: 30%;
 }
 .page #search input [type=text] {
@@ -268,8 +242,9 @@ p {
   border-top: 3px solid #fff;
   padding: 2px;
 }
-.page ul li {
+.list .title {
 	font-family: Nunito, "Arial Narrow Bold", sans-serif;
+	font-size: 1em;
 	list-style: none;
 	display: block;
 	border: 1px solid #7d7d7d;
@@ -278,6 +253,7 @@ p {
 	margin: .3em 0;
 	background: white;
 }
+
 .page ul li img {
 	float: left;
 	padding-right: 2px;
@@ -285,21 +261,32 @@ p {
 /* USED IN TAGS FORMS */	
 .page label {
 	float: left;
+
+.list ul {
+	padding: 0;
 }
-.page .tag {
+.follow-button {
 	float: left;
-	width: 20px;
+	padding-right: 0.3em;
 }
-.page .drop_content {
+.dropdown {
 	display: none;
 }
-.page ul li:hover .drop_content {
+li:hover .dropdown {
 	width: 95%;
 	font-size: 12px;
 	display: block;
 	padding: .2em .4em;
 	margin: 0;
 }
+.page label {
+	float: left;
+}
+.page .tag {
+	float: left;
+	width: 20px;
+}
+
 .page .add_challenge {
 	background: #f0f0f0;
 	display: none;

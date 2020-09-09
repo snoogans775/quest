@@ -55,6 +55,7 @@ function match_passwords($pass, $pass_confirm) {
 	global $errors;
 	if ($_POST[$pass] !== $_POST[$pass_confirm]) {
 		$errors[] = "Passwords are not the same.";
+		return $errors;
 	}
 }
 

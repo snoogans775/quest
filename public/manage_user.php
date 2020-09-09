@@ -17,11 +17,5 @@
 		<h2>Completed Games</h2>
 			<?php display_completed_games($_SESSION["user_id"]); ?>
 	</div>
-	<?php /*
-		if(isset($_SESSION["user_id"])) { 
-			include("{$current_subject["menu_name"]}.php"); 
-		} else {
-			include("home.php");
-		} */ ?>
 <?php include("../includes/footer.php"); ?>
 </div>

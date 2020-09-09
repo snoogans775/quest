@@ -37,7 +37,7 @@
 	<h3>The Quest is real!</h3>
 	<p><i>April 18, 2016</i></p>
 	<p>First of all, I give so many thanks to Andrew Musselman for all his work on the Quest v1.0. Every single discussion we had was worth it once I started refactoring and translating his original Python into the PHP smorgasbord that you are currently using. Here's a few tips to get you started:</p>
-	<ul>Updatez:
+	<ul>Updates:
 		<li>When you register here, your username and password will automagically work on the forums</li>
 		<li>Make a list, then follow games, then play games, then confirm completion.</li>
 		<li>Remember, these are people's FAVORITE GAMES OF ALL TIME. This is a great opportunity to try something you've never done before.</li>
