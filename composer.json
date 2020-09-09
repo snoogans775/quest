@@ -1,0 +1,13 @@
+{
+    "name": "kevin/quest",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.1"
+    },
+    "authors": [
+        {
+            "name": "Kevin Fredericks",
+            "email": "snoogans775@gmail.com"
+        }
+    ]
+}
