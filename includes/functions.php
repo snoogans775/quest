@@ -213,72 +213,13 @@
 				$output .= "\">";
 				$output .= htmlentities($subject["menu_name"]);
 				$output .= "</a>";
-				
-				/* Deprecated until pages are implemented
-				if ($subject_array["id"] == $subject["id"] || $page_array["subject_id"] == $subject["id"]) {
-					$page_set = find_pages_for_subject($subject["id"], true);
-					$output .= "<ul class=\"pages\">";
-					while($page = mysqli_fetch_assoc($page_set)) { 
-						$output .= "<li";
-						if ($page_array && $page["id"] == $page_array["id"]) {
-							$output .= " class=\"selected\"";
-						}
-						$output .= ">";
-						$output .= "<a href=\"index.php?page=";
-						$output .= urlencode($page["id"]);
-						$output .= "\">";
-						$output .= htmlentities($page["menu_name"]);
-						$output .= "</a></li>";
-					}
-					$output .= "</ul>";
-					mysqli_free_result($page_set);
-				}
-				*/
-				
 				$output .= "</li>"; //end of subject <li>
 			} // end of while($subject =...)
 			mysqli_free_result($subject_set); 
 			$output .= "</ul>";
 			return $output;
 		
-		} /* elseif ($layout_context == "admin") {
-		$output  = "<br /><a href=\"admin.php\">&laquo; Admin Home</a><br />";
-		$output .= "<ul class=\"navbar\">";
-		$subject_set = find_all_subjects(false);
-		while($subject = mysqli_fetch_assoc($subject_set)) {
-			$output .= "<li";
-			// $subject_array is the first argument for this function, it will be the current subject
-			if ($subject_array && $subject["id"] == $subject_array["id"]) {
-				$output .= " class=\"selected\"";
-			}
-			$output .= ">";
-			$output .= "<a href=\"manage_content.php?subject=";
-			$output .= urlencode($subject["id"]);
-			$output .= "\">";
-			$output .= htmlentities($subject["menu_name"]);
-			$output .= "</a>";
-			
-			$page_set = find_pages_for_subject($subject["id"], false);
-			$output .= "<ul class=\"pages\">";
-			while($page = mysqli_fetch_assoc($page_set)) { 
-				$output .= "<li";
-				if ($page_array && $page["id"] == $page_array["id"]) {
-					$output .= " class=\"selected\"";
-				}
-				$output .= ">";
-				$output .= "<a href=\"manage_content.php?page=";
-				$output .= urlencode($page["id"]);
-				$output .= "\">";
-				$output .= htmlentities($page["menu_name"]);
-				$output .= "</a></li>";
-			}
-			mysqli_free_result($page_set);
-			$output .= "</ul></li>";
 		}
-		mysqli_free_result($subject_set); 
-		$output .= "</ul>";
-		return $output;
-	} */
 	}
 	
 	function login_form() {
@@ -600,7 +541,7 @@
 	
 	function check_confirmation($safe_user_id, $safe_source_user_id, $safe_game_id) {
 		global $connection;
-		$query .= "SELECT * FROM completion_commits ";
+		$query  = "SELECT * FROM completion_commits ";
 		$query .= "WHERE user_id = {$safe_user_id} " ;
 		$query .= "AND game_id = {$safe_game_id} ";
 		$query .= "AND source_user_id = {$safe_source_user_id} ";
