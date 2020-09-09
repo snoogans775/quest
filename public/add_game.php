@@ -1,4 +1,4 @@
-<?php include("../includes/mng_usr_header.php"); ?>
+<?php include( __DIR__ . "/../includes/mng_usr_header.php"); ?>
 
 <?php
 	if (isset($_POST["submit"])) {
