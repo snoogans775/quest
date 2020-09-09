@@ -8,7 +8,8 @@
 		exit;
 	}
 	
-	function mysql_prep($connection, $string) {
+	function mysql_prep($string) {
+		global $connection;
 		$escaped_string = mysqli_real_escape_string($connection, $string);
 		return $escaped_string;
 	}
@@ -49,7 +50,8 @@
 	
 	// NAVIGATION FUNCTIONS //
 	
-	function find_all_subjects($connection) {
+	function find_all_subjects() {
+		global $connection;
 		$query = "SELECT * ";
 		$query .= "FROM subjects ";
 		// if ($public){
@@ -301,6 +303,7 @@
 	function find_list_item($connection, $user_id, $game_id, $table="users_games") {
 		// games.game_id is the only column in the database that uses this naming scheme. I wish it
 		// wasn't. I really do. Changing it simply does not jibe with these functions for some reason.
+		global $connection;
 		$safe_user_id = mysqli_real_escape_string($connection, $user_id);
 		$safe_game_id = mysqli_real_escape_string($connection, $game_id);
 		
@@ -426,7 +429,6 @@
 			return $game_set;
 	}
 	
-	// display_list() and display_list_by_platform should be refactored and merged
 	function display_list_by_platform() {
 		$game_set = find_all_games();
 		while($game = mysqli_fetch_assoc($game_set)) {
@@ -463,7 +465,7 @@
 	}
 	
 	function display_list($connection, $user_id, $public = true) {
-		$game_set = find_list_by_user($connection, $user_id);
+		$game_set = find_list_by_user($user_id);
 
 			$output = "<ul>";
 			while($game = mysqli_fetch_assoc($game_set)) {
@@ -560,12 +562,9 @@
 	
 	//LIST MODIFY FUNCTIONS
 	
-<<<<<<< HEAD
-	function add_game_to_list($connection, $title, $platform, $challenge = "") {
-=======
 	function add_game_to_list($title, $platform, $challenge = "") {
 		global $connection;
->>>>>>> heroku-dev
+
 		$required_fields = array("title", "platform");
 		validate_presences($required_fields);
 	
