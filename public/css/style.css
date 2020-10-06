@@ -202,11 +202,10 @@ p {
 	font-size: 12px;
 	padding: .5em;
 	margin: 0;
-	float: left;
-  outline: 1px solid #ddd;
-  border-top: 1px solid #fff;
-  padding: 5px;
-  background: #f0f0f0; 
+  	outline: 1px solid #ddd;
+  	border-top: 1px solid #fff;
+  	padding: 5px;
+  	background: #f0f0f0; 
 	max-width: 30%;
 }
 .page #search input [type=text] {
@@ -215,33 +214,29 @@ p {
 }
 .page #content {
 	overflow-y: scroll;
-	padding: 0.2em;
+	padding: 0.2em 0.2em 1em 0.2em;
 	margin: 0;
-	float: left;
-  outline: 1px solid #ddd;
-  border-top: 1px solid #fff;
-  background: #f0f0f0; 
-	max-width: 50%;
+  	outline: 1px solid #ddd;
+  	border-top: 1px solid #fff;
+  	background: #f0f0f0; 
+	min-width: 50%;
 	max-height: 400px;
 }
 .page #menu {
 	padding: 0 1em 0 0;
 	margin: 0;
-	float: left;
-  outline: 1px solid #ddd;
-  border-top: 1px solid #fff;
-  padding: 10px;
-  background: #f0f0f0; 
+  	outline: 1px solid #ddd;
+  	border-top: 1px solid #fff;
+  	padding: 10px;
+  	background: #f0f0f0; 
 	max-width: 80%;
 }  
 .page #sidebar {
 	float:left;
 	max-width: 40%;
-	text-align: right;
+	margin-left: 0.2em;
 }
 .page #sidebar ul {
-	float:left;
-	text-align: right;
 }
 .page #blog {
 	float:left;
