@@ -34,7 +34,7 @@
 	<hr>
 </div>
 <div class = "blog">
-	<h3>The Quest is real!</h3>
+	<h2>The Quest is real!</h2>
 	<p><i>April 18, 2016</i></p>
 	<p>First of all, I give so many thanks to Andrew Musselman for all his work on the Quest v1.0. Every single discussion we had was worth it once I started refactoring and translating his original Python into the PHP smorgasbord that you are currently using. Here's a few tips to get you started:</p>
 	<ul>Updatez:
